@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutogestionSenaMaui.ContentViews.Footer">
+    
+    <!-- Frame 427: Footer del sistema -->
+    <Border BackgroundColor="#2D7430"
+            Stroke="Transparent"
+            StrokeThickness="0"
+            Padding="16,12">
+        
+        <Grid ColumnDefinitions="*,Auto"
+              ColumnSpacing="16">
+            
+            <!-- Texto informativo del sistema -->
+            <Label Grid.Column="0"
+                   Text="Centro de Gestión del Servicio Nacional de Aprendizaje - Autogestion Sena"
+                   FontSize="12"
+                   TextColor="White"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   LineBreakMode="TailTruncation"/>
+            
+            <!-- Información adicional o versión -->
+            <Label Grid.Column="1"
+                   Text="{Binding AppVersion}"
+                   FontSize="10"
+                   TextColor="#E7FFE8"
+                   VerticalOptions="Center"
+                   HorizontalOptions="End"
+                   IsVisible="{Binding ShowAppVersion}"/>
+            
+        </Grid>
+        
+    </Border>
+    
+</ContentView>

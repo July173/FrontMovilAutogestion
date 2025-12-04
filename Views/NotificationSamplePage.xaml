@@ -1,0 +1,53 @@
+<!-- Ejemplo de uso del ContentView de notificación genérica -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:ContentViews"
+             x:Class="Views.NotificationSamplePage"
+             Title="Notificación Genérica">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="40" VerticalOptions="Center">
+            <cv:GenericNotificationView
+                Type="Error"
+                Title="Error de conexión"
+                Message="No se pudo conectar con el servidor. Verifica tu conexión a internet e intenta nuevamente."
+                PrimaryButtonText="Aceptar"
+                ShowSecondaryButton="False"/>
+
+            <cv:GenericNotificationView
+                Type="Success"
+                Title="Acción completada"
+                Message="Se ha llevado acabo con éxito tu solicitud."
+                PrimaryButtonText="Aceptar"
+                ShowSecondaryButton="False"/>
+
+            <cv:GenericNotificationView
+                Type="Info"
+                Title="¿Completaste todos los datos?"
+                Message="Por favor rellene todos los campos para continuar con tu solicitud."
+                PrimaryButtonText="Aceptar"
+                ShowSecondaryButton="False"/>
+
+            <cv:GenericNotificationView
+                Type="Warning"
+                Title="¿Estas seguro de continuar?"
+                Message="Esta acción no puede ser reversible después de ser ejecutada."
+                PrimaryButtonText="Aceptar"
+                SecondaryButtonText="Cancelar"
+                ShowSecondaryButton="True"/>
+
+            <cv:GenericNotificationView
+                Type="Mail"
+                Title="Correo enviado con éxito"
+                Message="Por favor revisa tu correo electrónico, te hemos enviado un código de seguridad para el cambio de tu contraseña."
+                PrimaryButtonText="Aceptar"
+                ShowSecondaryButton="False"/>
+
+            <cv:GenericNotificationView
+                Type="PasswordChanged"
+                Title="Contraseña cambiada"
+                Message="Se ha restablecido con éxito tu contraseña."
+                PrimaryButtonText="Aceptar"
+                ShowSecondaryButton="False"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

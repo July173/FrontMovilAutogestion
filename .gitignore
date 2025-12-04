@@ -1,0 +1,103 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+# Archivos y carpetas de configuración local
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Salidas de compilación
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+
+# Configuración específica de MAUI
+*.db
+*.db-shm
+*.db-wal
+
+# Archivos de configuración sensibles
+/Config/ApiSettings.cs
+
+# Archivos de paquetes NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.psmdcp
+*.ps1
+
+# Archivos de logs
+*.log
+
+# Archivos de depuración
+*.pdb
+*.mdb
+
+# Archivos de usuario de VS Code
+.vscode/
+
+# Archivos generados por Mac/iOS
+*.DS_Store
+*.app
+*.ipa
+
+# Archivos generados por Android
+*.apk
+*.ap_
+*.dex
+*.class
+*.keystore
+
+# Archivos generados por Windows
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.cer
+*.pfx
+
+# Archivos de configuración de Rider/JetBrains
+.idea/
+*.sln.iml
+
+# Archivos de configuración de Tizen
+*.tizen
+
+# Archivos de configuración de Xcode
+*.xcuserstate
+*.xcworkspace
+*.xcuserdata
+
+# Archivos de configuración de MacCatalyst
+*.xcarchive
+
+# Otros archivos temporales
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.orig
+
+# Archivos de configuración de imágenes y fuentes generadas por MAUI
+Resources/Fonts/*.ttf
+Resources/Images/*.png
+
+# Archivos de configuración de usuario de Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos de configuración de usuario de Linux
+*~
+
+# Archivos de configuración de usuario de macOS
+Icon?
+
+# se ignora una carpeta de depuracion y lo que se hizo en reamedme y todo lo que hay dentro
+readmes/
+.onedriveignore

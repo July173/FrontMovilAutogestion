@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentViews="clr-namespace:AutogestionSenaMaui.ContentViews"
+             xmlns:vm="clr-namespace:AutogestionSenaMaui.ViewModels"
+             x:Class="AutogestionSenaMaui.Views.ApprenticeDashboardPage"
+             Title="Dashboard - Aprendiz">
+
+  <Grid x:Name="MainContainer">
+    <!-- Contenido principal - Solo visible cuando NO está cargando -->
+    <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
+      <VerticalStackLayout Spacing="20" Padding="16,20">
+      
+        <!-- Barra superior con botón de actualizar -->
+        <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,5">
+          <Label Text="Mi Dashboard"
+                 FontSize="22"
+                 FontAttributes="Bold"
+                 TextColor="#333333"
+                 VerticalOptions="Center" />
+          <Button Grid.Column="1"
+                  Text="🔄 Actualizar"
+                  BackgroundColor="#2E7D32"
+                  TextColor="White"
+                  CornerRadius="8"
+                  FontSize="14"
+                  HeightRequest="40"
+                  Padding="15,0"
+                  Command="{Binding RefreshCommand}" />
+        </Grid>
+         
+        <!-- Saludo principal -->
+        <Frame BackgroundColor="White"
+               CornerRadius="10"
+               Padding="0"
+               HorizontalOptions="FillAndExpand"
+               HasShadow="True">
+          <VerticalStackLayout>
+            <BoxView HeightRequest="20"
+                     BackgroundColor="#2E7D32"
+                     CornerRadius="10,10,0,0" />
+            <VerticalStackLayout Spacing="10" Padding="10,10" HorizontalOptions="Center" VerticalOptions="Center">
+              <Frame BackgroundColor="#CCCCCC"
+                     CornerRadius="35"
+                     HeightRequest="60"
+                     WidthRequest="60"
+                     Padding="5"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center" />
+              <Label Text="¡Bienvenido!"
+                     FontSize="20"
+                     FontAttributes="Bold"
+                     TextColor="Black"
+                     HorizontalTextAlignment="Center"
+                     LineBreakMode="WordWrap"
+                     MaxLines="1" />
+              <Label Text="{Binding ApprenticeName}"
+                     FontSize="16"
+                     TextColor="Black"
+                     FontAttributes="Bold"
+                     HorizontalTextAlignment="Center"
+                     LineBreakMode="TailTruncation"
+                     MaxLines="2" />
+              <Label Text="Gestiona desde aquí tus procesos de formación"
+                     FontSize="13"
+                     TextColor="#666666"
+                     HorizontalTextAlignment="Center"
+                     LineBreakMode="WordWrap"
+                     MaxLines="2" />
+            </VerticalStackLayout>
+          </VerticalStackLayout>
+        </Frame>
+
+        <!-- Estado de solicitud -->
+        <Frame BackgroundColor="White"
+               CornerRadius="10"
+               Padding="0"
+               HasShadow="True"
+               HorizontalOptions="FillAndExpand">
+          <VerticalStackLayout>
+            <BoxView HeightRequest="60"
+                     BackgroundColor="{Binding RequestStateColor}"
+                     CornerRadius="10,10,0,0"
+                     VerticalOptions="Start" />
+            <VerticalStackLayout Spacing="15" Padding="20">
+              <Frame BackgroundColor="#E5E7EB"
+                     CornerRadius="50"
+                     HeightRequest="80"
+                     WidthRequest="80"
+                     Padding="8"
+                     HorizontalOptions="Center" />
+              <Label Text="{Binding RequestStateLabel}"
+                     FontSize="18"
+                     FontAttributes="Bold"
+                     TextColor="#333333"
+                     HorizontalTextAlignment="Center" />
+              <Label Text="{Binding RequestStateDescription}"
+                     FontSize="14"
+                     TextColor="#666666"
+                     HorizontalTextAlignment="Center" />
+              <Button Text="{Binding RequestActionText}"
+                      BackgroundColor="#2E7D32"
+                      TextColor="White"
+                      CornerRadius="10"
+                      FontSize="16"
+                      HeightRequest="45"
+                      HorizontalOptions="FillAndExpand"
+                      Margin="0,10,0,0"
+                      IsVisible="{Binding ShowEmptyRequestState}" />
+            </VerticalStackLayout>
+          </VerticalStackLayout>
+        </Frame>
+
+        <!-- Instructor asignado -->
+        <Frame BackgroundColor="White"
+               BorderColor="#a5d9a7"
+               CornerRadius="10"
+               Padding="0"
+               HasShadow="True"
+               HorizontalOptions="FillAndExpand">
+          <VerticalStackLayout>
+            <BoxView HeightRequest="60"
+                     BackgroundColor="#2E7D32"
+                     CornerRadius="10,10,0,0" />
+            <VerticalStackLayout Spacing="15" Padding="20">
+              <Frame BackgroundColor="#C7C7C7"
+                     CornerRadius="50"
+                     HeightRequest="80"
+                     WidthRequest="80"
+                     Padding="8"
+                     HorizontalOptions="Center" />
+              <Label Text="{Binding InstructorFullName}"
+                     FontSize="18"
+                     FontAttributes="Bold"
+                     TextColor="#333333"
+                     HorizontalTextAlignment="Center" />
+              <Frame BackgroundColor="{Binding InstructorTagBackground}"
+                     CornerRadius="20"
+                     Padding="12,8"
+                     HorizontalOptions="Center">
+                <Label Text="{Binding InstructorTagText}"
+                       FontSize="12"
+                       TextColor="#1E1E1E"
+                       HorizontalTextAlignment="Center" />
+              </Frame>
+              <Label Text="{Binding InstructorKnowledgeArea}"
+                     FontSize="14"
+                     TextColor="#555"
+                     HorizontalTextAlignment="Center" />
+              <VerticalStackLayout Spacing="6" IsVisible="{Binding ShowInstructorContact}">
+                <Label Text="{Binding InstructorContactEmail}"
+                       FontSize="13"
+                       TextColor="#2E7D32"
+                       HorizontalTextAlignment="Center" />
+                <Label Text="{Binding InstructorContactPhone}"
+                       FontSize="13"
+                       TextColor="#2E7D32"
+                       HorizontalTextAlignment="Center" />
+                <Label FontSize="12"
+                       TextColor="#666"
+                       HorizontalTextAlignment="Center">
+                  <Label.FormattedText>
+                    <FormattedString>
+                      <Span Text="Asignado el " />
+                      <Span Text="{Binding InstructorAssignedAtDisplay}" />
+                    </FormattedString>
+                  </Label.FormattedText>
+                </Label>
+              </VerticalStackLayout>
+            </VerticalStackLayout>
+          </VerticalStackLayout>
+        </Frame>
+
+        <!-- Detalle de solicitud -->
+        <Frame BackgroundColor="White"
+               CornerRadius="10"
+               Padding="0"
+               HasShadow="True"
+               HorizontalOptions="FillAndExpand">
+          <VerticalStackLayout>
+            <BoxView HeightRequest="60"
+                     BackgroundColor="#2E7D32"
+                     CornerRadius="10,10,0,0" />
+            <VerticalStackLayout Spacing="15" Padding="20">
+              <VerticalStackLayout IsVisible="{Binding ShowRequestDetail}" Spacing="12">
+                <Label Text="Detalle de la solicitud"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#333333"
+                       HorizontalTextAlignment="Center" />
+                <VerticalStackLayout Spacing="8">
+                  <Label Text="Empresa:"
+                         FontAttributes="Bold"
+                         TextColor="#333"
+                         FontSize="15" />
+                  <Label Text="{Binding EnterpriseName}"
+                         TextColor="#555"
+                         FontSize="14" />
+                  <Label Text="Jefe inmediato:"
+                         FontAttributes="Bold"
+                         TextColor="#333"
+                         FontSize="15" />
+                  <Label Text="{Binding BossName}"
+                         TextColor="#555"
+                         FontSize="14" />
+                  <Label Text="Modalidad:"
+                         FontAttributes="Bold"
+                         TextColor="#333"
+                         FontSize="15" />
+                  <Label Text="{Binding ModalityDisplay}"
+                         TextColor="#555"
+                         FontSize="14" />
+                  <Label Text="Ciudad:"
+                         FontAttributes="Bold"
+                         TextColor="#333"
+                         FontSize="15" />
+                  <Label Text="{Binding CityDisplay}"
+                         TextColor="#555"
+                         FontSize="14" />
+                  <Label Text="Fecha solicitud:"
+                         FontAttributes="Bold"
+                         TextColor="#333"
+                         FontSize="15" />
+                  <Label Text="{Binding RequestDateDisplay}"
+                         TextColor="#555"
+                         FontSize="14" />
+                  <Label Text="Inicio etapa:"
+                         FontAttributes="Bold"
+                         TextColor="#333"
+                         FontSize="15" />
+                  <Label Text="{Binding StartDateDisplay}"
+                         TextColor="#555"
+                         FontSize="14" />
+                  <Label Text="Fin etapa:"
+                         FontAttributes="Bold"
+                         TextColor="#333"
+                         FontSize="15" />
+                  <Label Text="{Binding EndDateDisplay}"
+                         TextColor="#555"
+                         FontSize="14" />
+                </VerticalStackLayout>
+                <Button Text="Descargar soporte"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="#2E7D32"
+                        BorderColor="#2E7D32"
+                        BorderWidth="1"
+                        CornerRadius="10"
+                        HeightRequest="44"
+                        Command="{Binding OpenPdfCommand}"
+                        IsVisible="{Binding ShowPdfButton}" />
+              </VerticalStackLayout>
+
+              <VerticalStackLayout IsVisible="{Binding ShowEmptyRequestState}" Spacing="10">
+                <Label Text="Sin Solicitud Activa"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       TextColor="#333333" />
+                <Label Text="Aparecerán los detalles de la solicitud una vez sea aprobada"
+                       FontSize="14"
+                       TextColor="#666666"
+                       HorizontalTextAlignment="Center" />
+              </VerticalStackLayout>
+            </VerticalStackLayout>
+          </VerticalStackLayout>
+        </Frame>
+      </VerticalStackLayout>
+    </ScrollView>
+
+    <!-- Overlay de carga -->
+    <Grid IsVisible="{Binding IsLoading}"
+          BackgroundColor="#80FFFFFF"
+          HorizontalOptions="Fill"
+          VerticalOptions="Fill">
+      <Frame BackgroundColor="White"
+             CornerRadius="16"
+             Padding="30"
+             HasShadow="True"
+             HorizontalOptions="Center"
+             VerticalOptions="Center">
+        <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
+          <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             Color="#2E7D32"
+                             HeightRequest="50"
+                             WidthRequest="50" />
+          <Label Text="Cargando dashboard..."
+                 FontSize="16"
+                 TextColor="#333333"
+                 HorizontalTextAlignment="Center" />
+          <Label Text="Consultando información del aprendiz"
+                 FontSize="13"
+                 TextColor="#666666"
+                 HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+      </Frame>
+    </Grid>
+  </Grid>
+
+</ContentPage>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentViews="clr-namespace:AutogestionSenaMaui.ContentViews"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="AutogestionSenaMaui.Views.AdminDashboardPage"
+             Title="Dashboard - Administración"
+             BackgroundColor="#F5F5F5">
+
+       <VerticalStackLayout>
+              <contentViews:DashboardLayout x:Name="DashboardLayout">
+                     <contentViews:DashboardLayout.PageContent>
+                            <ScrollView>
+                                   <VerticalStackLayout Spacing="20" Padding="20">
+                    
+                    <!-- Título Principal -->
+                    <VerticalStackLayout Spacing="8" HorizontalOptions="Fill" VerticalOptions="Start">
+                        <Label Text="BIENVENIDO A AUTOGESTIÓN SENA"
+                               FontSize="{OnIdiom Phone=18, Default=22}"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               TextColor="#43A047"
+                               Margin="0,6,0,0"
+                               LineBreakMode="WordWrap" />
+
+                        <!-- Botón de actualizar (colocado debajo del título, centrado y responsive) -->
+                        <Button Text="Actualizar"
+                                BackgroundColor="#43A047"
+                                TextColor="White"
+                                CornerRadius="8"
+                                Clicked="OnReloadStatistics"
+                                HorizontalOptions="Center"
+                                WidthRequest="{OnIdiom Phone=140, Default=180}"
+                                HeightRequest="40"/>
+                    </VerticalStackLayout>
+
+                    <!-- Tarjetas de Estadísticas Principales -->
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                        
+                        <!-- Aprendices Registrados -->
+                        <Frame BackgroundColor="White" 
+                               CornerRadius="12" 
+                               HasShadow="True" 
+                               Padding="16"
+                               BorderColor="Transparent">
+                            <VerticalStackLayout Spacing="8">
+                                <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                                    <Frame BackgroundColor="#4CAF50" 
+                                           CornerRadius="8" 
+                                           Padding="8" 
+                                           HasShadow="False"
+                                           WidthRequest="40"
+                                           HeightRequest="40">
+                                        <Label Text="👨‍🎓" 
+                                               FontSize="20" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                                <Label Text="Registro de" 
+                                       FontSize="12" 
+                                       TextColor="#666"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Aprendices" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label x:Name="TotalApprenticesLabel" 
+                                       Text="{Binding ApprenticesCount, StringFormat='{0:N0}'}" 
+                                       FontSize="{OnIdiom Phone=18, Default=20}"
+                                       FontAttributes="Bold"
+                                       TextColor="#4CAF50"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,4,0,0"/>
+                                <Label Text="Aprendices Registrados" 
+                                       FontSize="10" 
+                                       TextColor="#999"
+                                       HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Solicitudes Sin Asignar -->
+                        <Frame Grid.Column="1"
+                               BackgroundColor="White" 
+                               CornerRadius="12" 
+                               HasShadow="True" 
+                               Padding="16"
+                               BorderColor="Transparent">
+                            <VerticalStackLayout Spacing="8">
+                                <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                                    <Frame BackgroundColor="#4CAF50" 
+                                           CornerRadius="8" 
+                                           Padding="8" 
+                                           HasShadow="False"
+                                           WidthRequest="40"
+                                           HeightRequest="40">
+                                        <Label Text="📋" 
+                                               FontSize="20" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                                <Label Text="Registro de" 
+                                       FontSize="12" 
+                                       TextColor="#666"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Solicitudes" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="sin asignar" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,-4,0,0"/>
+                                <Label x:Name="UnassignedCountLabel" 
+                                       Text="{Binding UnassignedRequestsCount}" 
+                                       FontSize="{OnIdiom Phone=18, Default=20}"
+                                       FontAttributes="Bold"
+                                       TextColor="#4CAF50"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,4,0,0"/>
+                                <Label Text="Registros" 
+                                       FontSize="10" 
+                                       TextColor="#999"
+                                       HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Solicitudes Asignadas -->
+                        <Frame Grid.Column="2"
+                               BackgroundColor="White" 
+                               CornerRadius="12" 
+                               HasShadow="True" 
+                               Padding="16"
+                               BorderColor="Transparent">
+                            <VerticalStackLayout Spacing="8">
+                                <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                                    <Frame BackgroundColor="#4CAF50" 
+                                           CornerRadius="8" 
+                                           Padding="8" 
+                                           HasShadow="False"
+                                           WidthRequest="40"
+                                           HeightRequest="40">
+                                        <Label Text="📊" 
+                                               FontSize="20" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"/>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                                <Label Text="Registro de" 
+                                       FontSize="12" 
+                                       TextColor="#666"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="Solicitudes" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="asignadas" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,-4,0,0"/>
+                                <Label x:Name="TotalAssignmentsLabel" 
+                                       Text="{Binding AssignedRequestsCount}" 
+                                       FontSize="{OnIdiom Phone=18, Default=20}"
+                                       FontAttributes="Bold"
+                                       TextColor="#4CAF50"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="0,4,0,0"/>
+                                <Label Text="Registros" 
+                                       FontSize="10" 
+                                       TextColor="#999"
+                                       HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+
+                    <!-- Gráficas -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,10,0,0">
+
+                        <!-- Gráfica de Asignaciones de Aprendices -->
+                        <Frame BackgroundColor="White" 
+                               CornerRadius="12" 
+                               HasShadow="True" 
+                               Padding="16"
+                               BorderColor="Transparent">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="Gráfica de asignaciones de aprendices" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalTextAlignment="Center"/>
+
+                                <!-- Contenedor de la gráfica -->
+                                <microcharts:ChartView x:Name="AssignmentsChart"
+                                                       HeightRequest="200"
+                                                       Margin="0,8,0,0"/>
+
+                                <HorizontalStackLayout Spacing="4" HorizontalOptions="Center">
+                                    <Frame BackgroundColor="#2196F3" 
+                                           WidthRequest="8" 
+                                           HeightRequest="8" 
+                                           CornerRadius="4" 
+                                           HasShadow="False"
+                                           Padding="0"/>
+                                    <Label Text="Recién actualizada" 
+                                           FontSize="10" 
+                                           TextColor="#666"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Gráfica de Asignaciones Aprobadas -->
+                        <Frame Grid.Column="1"
+                               BackgroundColor="White" 
+                               CornerRadius="12" 
+                               HasShadow="True" 
+                               Padding="16"
+                               BorderColor="Transparent">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="Gráfica de asignaciones aprobadas" 
+                                       FontSize="14" 
+                                       FontAttributes="Bold"
+                                       TextColor="#333"
+                                       HorizontalTextAlignment="Center"/>
+
+                                <!-- Contenedor de la gráfica -->
+                                <microcharts:ChartView x:Name="ApprovedChart"
+                                                       HeightRequest="200"
+                                                       Margin="0,8,0,0"/>
+
+                                <HorizontalStackLayout Spacing="4" HorizontalOptions="Center">
+                                    <Frame BackgroundColor="#2196F3" 
+                                           WidthRequest="8" 
+                                           HeightRequest="8" 
+                                           CornerRadius="4" 
+                                           HasShadow="False"
+                                           Padding="0"/>
+                                    <Label Text="Recién actualizada" 
+                                           FontSize="10" 
+                                           TextColor="#666"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+
+                                   </VerticalStackLayout>
+                            </ScrollView>
+                     </contentViews:DashboardLayout.PageContent>
+              </contentViews:DashboardLayout>
+       </VerticalStackLayout>
+</ContentPage>

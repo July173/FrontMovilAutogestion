@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:converters="clr-namespace:AutogestionSenaMaui.Converters"
+        x:Class="AutogestionSenaMaui.ContentViews.TopBar">
+    <ContentView.Resources>
+  <ResourceDictionary>
+   <converters:StringNotEmptyConverter x:Key="StringNotEmptyConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <!-- Contenedor principal con overlay -->
+ <Grid>
+     <!-- TopBar normal -->
+<Border BackgroundColor="#DFE3E8"
+        Padding="20,10"
+     Margin="0">
+            <Border.StrokeShape>
+            <RoundRectangle CornerRadius="10"/>
+     </Border.StrokeShape>
+     
+ <!-- Grid del TopBar -->
+        <Grid x:Name="MainGrid" RowDefinitions="Auto" ColumnDefinitions="*,Auto">
+
+        <!-- Breadcrumb -->
+   <HorizontalStackLayout x:Name="BreadcrumbContainer"
+    Grid.Row="0" Grid.Column="0"
+         Spacing="10"
+         Padding="10,0,10,5"
+         HorizontalOptions="Start"
+  VerticalOptions="Center">
+    <Label x:Name="BreadcrumbRoot"
+       Text="Dashboard"
+    FontSize="14"
+   FontFamily="Roboto-Regular"
+   TextColor="#263238"
+   Opacity="0.5"
+           VerticalOptions="Center"/>
+     <Label Text=">"
+FontSize="14"
+    FontFamily="Roboto-Regular"
+    TextColor="#607D8B"
+    VerticalOptions="Center"/>
+   <Label x:Name="BreadcrumbCurrent"
+   Text="Inicio"
+ FontSize="20"
+   FontFamily="Roboto-Regular"
+  TextColor="#263238"
+  VerticalOptions="Center"/>
+  </HorizontalStackLayout>
+ 
+       <!-- Botón Hamburguesa -->
+        <Border x:Name="HamburgerButton"
+     Grid.Row="0" Grid.Column="1"
+         BackgroundColor="Transparent"
+   Padding="12"
+         VerticalOptions="Center"
+  HorizontalOptions="End">
+       <Border.StrokeShape>
+      <RoundRectangle CornerRadius="8"/>
+       </Border.StrokeShape>
+     <Border.GestureRecognizers>
+        <TapGestureRecognizer Tapped="OnHamburgerTapped"/>
+   </Border.GestureRecognizers>
+     <Label Text="&#xf479;"
+      FontFamily="BootstrapIcons"
+        FontSize="24"
+   TextColor="#607D8B"
+         VerticalOptions="Center"/>
+   </Border>
+  </Grid>
+        </Border>
+
+        <!-- Overlay Modal (aparece sobre todo el contenido) -->
+        <Grid x:Name="OverlayContainer"
+     BackgroundColor="#80000000"
+           IsVisible="False"
+  ZIndex="100">
+         <Grid.GestureRecognizers>
+    <TapGestureRecognizer Tapped="OnOverlayTapped"/>
+            </Grid.GestureRecognizers>
+            
+   <!-- Menú Desplegable Flotante -->
+            <Border x:Name="DropdownMenu"
+        BackgroundColor="White"
+    Padding="0"
+    VerticalOptions="Start"
+             HorizontalOptions="End"
+       Margin="20,80,20,20"
+   WidthRequest="280"
+  ZIndex="110">
+       <Border.StrokeShape>
+                <RoundRectangle CornerRadius="16"/>
+   </Border.StrokeShape>
+           <Border.Shadow>
+  <Shadow Brush="Black"
+      Offset="0,8"
+            Radius="16"
+       Opacity="0.3" />
+      </Border.Shadow>
+ 
+    <VerticalStackLayout Spacing="0" Padding="0">
+   
+     <!-- Header del menú con gradiente -->
+       <Border BackgroundColor="#43a047"
+ Padding="20,16">
+   <Border.StrokeShape>
+   <RoundRectangle CornerRadius="16,16,0,0"/>
+ </Border.StrokeShape>
+         <HorizontalStackLayout Spacing="12">
+      <Label Text="&#xf0c9;"
+       FontFamily="BootstrapIcons"
+      FontSize="20"
+TextColor="White"
+       VerticalOptions="Center"/>
+           <Label Text="Menú de Opciones"
+     FontSize="18"
+  FontFamily="Roboto-Medium"
+     TextColor="White"
+   VerticalOptions="Center"/>
+    </HorizontalStackLayout>
+    </Border>
+      
+    <!-- Contenido del menú -->
+          <VerticalStackLayout Spacing="0" Padding="8,12">
+     
+                <!-- Opción Notificaciones -->
+           <Border x:Name="NotificationOption"
+              BackgroundColor="Transparent"
+  Padding="0"
+    Margin="4">
+      <Border.StrokeShape>
+        <RoundRectangle CornerRadius="12"/>
+       </Border.StrokeShape>
+    <Border.GestureRecognizers>
+          <TapGestureRecognizer Tapped="OnNotificationsTapped"/>
+             </Border.GestureRecognizers>
+         <Border.Triggers>
+       <Trigger TargetType="Border" Property="IsEnabled" Value="True">
+   <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Trigger>
+         </Border.Triggers>
+            <HorizontalStackLayout Spacing="16" Padding="16,20">
+      <Frame BackgroundColor="#E3F2FD"
+      CornerRadius="12"
+   Padding="12"
+        HasShadow="False">
+         <Label Text="&#xf234;"
+        FontFamily="BootstrapIcons"
+    FontSize="20"
+       TextColor="#1976D2"
+          VerticalOptions="Center"/>
+           </Frame>
+       <VerticalStackLayout Spacing="4" VerticalOptions="Center">
+     <Label Text="Notificaciones"
+       FontSize="16"
+  FontFamily="Roboto-Medium"
+          TextColor="#263238"/>
+     <Label Text="Ver alertas y mensajes"
+     FontSize="12"
+          FontFamily="Roboto-Regular"
+          TextColor="#757575"/>
+            </VerticalStackLayout>
+               <Label Text="&#xf105;"
+         FontFamily="BootstrapIcons"
+       FontSize="16"
+         TextColor="#BDBDBD"
+         VerticalOptions="Center"
+     HorizontalOptions="EndAndExpand"/>
+        </HorizontalStackLayout>
+     </Border>
+   
+               <!-- Separador -->
+       <BoxView HeightRequest="1" 
+ BackgroundColor="#F0F0F0"
+          Margin="16,8"/>
+
+      <!-- Opción Cerrar Sesión -->
+     <Border x:Name="LogoutOption"
+   BackgroundColor="Transparent"
+      Padding="0"
+           Margin="4">
+        <Border.StrokeShape>
+ <RoundRectangle CornerRadius="12"/>
+</Border.StrokeShape>
+                  <Border.GestureRecognizers>
+               <TapGestureRecognizer Tapped="OnLogoutTapped"/>
+ </Border.GestureRecognizers>
+         <HorizontalStackLayout Spacing="16" Padding="16,20">
+                <Frame BackgroundColor="#FFEBEE"
+     CornerRadius="12"
+        Padding="12"
+    HasShadow="False">
+  <Label Text="&#xf1ae;"
+          FontFamily="BootstrapIcons"
+         FontSize="18"
+      TextColor="#D32F2F"
+    VerticalOptions="Center"/>
+                </Frame>
+        <VerticalStackLayout Spacing="4" VerticalOptions="Center">
+        <Label Text="Cerrar Sesión"
+      FontSize="16"
+            FontFamily="Roboto-Medium"
+        TextColor="#D32F2F"/>
+       <Label Text="Salir de la aplicación"
+          FontSize="12"
+      FontFamily="Roboto-Regular"
+       TextColor="#757575"/>
+       </VerticalStackLayout>
+         <Label Text="&#xf105;"
+   FontFamily="BootstrapIcons"
+      FontSize="16"
+           TextColor="#BDBDBD"
+   VerticalOptions="Center"
+       HorizontalOptions="EndAndExpand"/>
+       </HorizontalStackLayout>
+               </Border>
+      
+            </VerticalStackLayout>
+           </VerticalStackLayout>
+       </Border>
+     </Grid>
+    </Grid>
+</ContentView>

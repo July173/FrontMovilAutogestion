@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentviews="clr-namespace:AutogestionSenaMaui.ContentViews"
+             x:Class="AutogestionSenaMaui.Views.HomePage"
+             Title="Home"
+             Shell.NavBarIsVisible="False">
+    
+    <!-- 
+        HomePage - Página principal después del login
+        Similar a Home.tsx en React
+        - Verifica rol del usuario
+        - Carga dashboard apropiado
+        - Envuelve en MainLayout (TopBar + Content + Footer)
+    -->
+    
+    <Grid RowDefinitions="Auto,*,Auto" BackgroundColor="#D9D9D9">
+        
+        <!-- Frame 425: TopBar con breadcrumb y notificaciones -->
+        <contentviews:TopBar x:Name="TopBarView" 
+                             Grid.Row="0"
+                             Grid.ColumnSpan="2"
+                             BindingContext="{Binding}"/>
+        
+        <!-- Frame 426: Contenido dinámico según rol del usuario -->
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*">
+            
+            <!-- Menú Lateral Dinámico (empuja el contenido) -->
+            <contentviews:DynamicSideMenu x:Name="SideMenu"
+                                          Grid.Column="0"
+                                          WidthRequest="0"
+                                          IsVisible="False"
+                                          HorizontalOptions="Start"
+                                          VerticalOptions="Fill"/>
+            
+            <Grid Grid.Column="1">
+                <!-- Indicador de carga mientras se verifica el rol -->
+                <VerticalStackLayout x:Name="LoadingView"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="16"
+                                     Padding="40">
+                    <ActivityIndicator x:Name="LoadingIndicator"
+                                       IsRunning="True"
+                                       Color="#39A900"
+                                       WidthRequest="48"
+                                       HeightRequest="48"
+                                       HorizontalOptions="Center"/>
+                    <Label Text="Cargando tu dashboard..."
+                           FontSize="16"
+                           TextColor="#666666"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+                
+                <!-- Contenedor para el dashboard dinámico -->
+                <ScrollView x:Name="DashboardScrollView"
+                            IsVisible="False">
+                    <ContentView x:Name="DashboardContainer"
+                                 BackgroundColor="#D9D9D9"
+                                 Padding="16">
+                        <!-- El contenido del dashboard se inyectará aquí dinámicamente -->
+                    </ContentView>
+                </ScrollView>
+            </Grid>
+            
+        </Grid>
+        
+        <!-- Frame 427: Footer del sistema -->
+        <contentviews:Footer x:Name="FooterView" 
+                             Grid.Row="2"
+                             Grid.ColumnSpan="2"
+                             BindingContext="{Binding}"/>
+        
+    </Grid>
+    
+</ContentPage>

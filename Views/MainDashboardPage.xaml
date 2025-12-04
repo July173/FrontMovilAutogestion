@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentViews="clr-namespace:AutogestionSenaMaui.ContentViews"
+             x:Class="AutogestionSenaMaui.Views.MainDashboardPage"
+             Title="Dashboard">
+
+    <VerticalStackLayout>
+        <contentViews:DashboardLayout x:Name="DashboardLayout">
+        <contentViews:DashboardLayout.PageContent>
+            <!-- Contenido predeterminado: Dashboard Inicio -->
+            <VerticalStackLayout Spacing="32" Padding="20">
+                
+                <!-- Título principal -->
+                        <Label Text="BIENVENIDO A AUTOGESTIÓN SENA"
+                               FontSize="36"
+                               FontFamily="Roboto-Bold"
+                               TextColor="#2E7D32"
+                               Opacity="0.8"
+                               HorizontalTextAlignment="Center"
+                               LineBreakMode="WordWrap"/>
+                        
+                        <!-- Tarjetas de estadísticas -->
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                            <HorizontalStackLayout Spacing="48">
+                                
+                                <!-- Tarjeta 1: Aprendices -->
+                                <Border BackgroundColor="White"
+                                        Stroke="#CFD8DC"
+                                        StrokeThickness="1"
+                                        WidthRequest="232"
+                                        HeightRequest="180">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="12"/>
+                                    </Border.StrokeShape>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,*">
+                                        <!-- Icono -->
+                                        <Border Grid.Row="0"
+                                                BackgroundColor="#4CAF50"
+                                                WidthRequest="48"
+                                                HeightRequest="48"
+                                                Margin="23,39,0,0"
+                                                HorizontalOptions="Start">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="12"/>
+                                            </Border.StrokeShape>
+                                            <Label Text="&#xf4da;"
+                                                   FontFamily="BootstrapIcons"
+                                                   FontSize="24"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+                                        <!-- Texto superior derecha -->
+                                        <Label Grid.Row="0"
+                                               Text="Registro de"
+                                               FontSize="14"
+                                               FontFamily="Roboto-Regular"
+                                               TextColor="#546E7A"
+                                               HorizontalOptions="End"
+                                               Margin="0,27,16,0"/>
+                                        <!-- Título -->
+                                        <Label Grid.Row="1"
+                                               Text="Aprendices"
+                                               FontSize="24"
+                                               FontFamily="Roboto-SemiBold"
+                                               TextColor="#263238"
+                                               HorizontalOptions="End"
+                                               Margin="0,5,16,0"/>
+                                        <!-- Separador y estadística -->
+                                        <Grid Grid.Row="3" VerticalOptions="End" RowDefinitions="Auto,*">
+                                            <BoxView Grid.Row="0" Color="#ECEFF1" HeightRequest="1"/>
+                                            <VerticalStackLayout Grid.Row="1" Spacing="4" Padding="16">
+                                                <Label FontFamily="Roboto-Bold"
+                                                       FontSize="22.9"
+                                                       TextColor="#4CAF50">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="125.000.000" FontFamily="Roboto-Bold" TextColor="#4CAF50"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label Text="Aprendices Registrados"
+                                                       FontSize="16"
+                                                       FontFamily="Roboto-Regular"
+                                                       TextColor="#546E7A"/>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                
+                                <!-- Tarjeta 2: Solicitudes sin asignar -->
+                                <Border BackgroundColor="White"
+                                        Stroke="#CFD8DC"
+                                        StrokeThickness="1"
+                                        WidthRequest="249"
+                                        HeightRequest="180">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="12"/>
+                                    </Border.StrokeShape>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,*">
+                                        <Border Grid.Row="0"
+                                                BackgroundColor="#4CAF50"
+                                                WidthRequest="48"
+                                                HeightRequest="48"
+                                                Margin="15,42,0,0"
+                                                HorizontalOptions="Start">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="12"/>
+                                            </Border.StrokeShape>
+                                            <Label Text="&#xf5ec;"
+                                                   FontFamily="BootstrapIcons"
+                                                   FontSize="24"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+                                        <Label Grid.Row="0"
+                                               Text="Registro de"
+                                               FontSize="14"
+                                               FontFamily="Roboto-Regular"
+                                               TextColor="#546E7A"
+                                               HorizontalOptions="End"
+                                               Margin="0,27,16,0"/>
+                                        <Label Grid.Row="1"
+                                               Text="Solicitudes sin asignar"
+                                               FontSize="24"
+                                               FontFamily="Roboto-SemiBold"
+                                               TextColor="#263238"
+                                               HorizontalOptions="End"
+                                               LineBreakMode="WordWrap"
+                                               HorizontalTextAlignment="End"
+                                               WidthRequest="136"
+                                               Margin="0,5,16,0"/>
+                                        <Grid Grid.Row="3" VerticalOptions="End" RowDefinitions="Auto,*">
+                                            <BoxView Grid.Row="0" Color="#ECEFF1" HeightRequest="1"/>
+                                            <Label Grid.Row="1" FontFamily="Roboto-Bold" FontSize="22.9" Padding="16">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="20" FontFamily="Roboto-Bold" TextColor="#4CAF50"/>
+                                                        <Span Text=" Registros" FontFamily="Roboto-Regular" FontSize="16" TextColor="#546E7A"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                
+                                <!-- Tarjeta 3: Solicitudes asignadas -->
+                                <Border BackgroundColor="White"
+                                        Stroke="#CFD8DC"
+                                        StrokeThickness="1"
+                                        WidthRequest="232"
+                                        HeightRequest="180">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="12"/>
+                                    </Border.StrokeShape>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,*">
+                                        <Border Grid.Row="0"
+                                                BackgroundColor="#4CAF50"
+                                                WidthRequest="48"
+                                                HeightRequest="48"
+                                                Margin="16,48,0,0"
+                                                HorizontalOptions="Start">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="12"/>
+                                            </Border.StrokeShape>
+                                            <Label Text="&#xf4e6;"
+                                                   FontFamily="BootstrapIcons"
+                                                   FontSize="24"
+                                                   TextColor="White"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Border>
+                                        <Label Grid.Row="0"
+                                               Text="Registro de"
+                                               FontSize="14"
+                                               FontFamily="Roboto-Regular"
+                                               TextColor="#546E7A"
+                                               HorizontalOptions="End"
+                                               Margin="0,27,16,0"/>
+                                        <Label Grid.Row="1"
+                                               FontSize="24"
+                                               FontFamily="Roboto-SemiBold"
+                                               TextColor="#263238"
+                                               HorizontalOptions="End"
+                                               Margin="0,5,16,0">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Solicitudes" />
+                                                    <Span Text="&#x0a;"/>
+                                                    <Span Text="asignadas"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Grid Grid.Row="3" VerticalOptions="End" RowDefinitions="Auto,*">
+                                            <BoxView Grid.Row="0" Color="#ECEFF1" HeightRequest="1"/>
+                                            <Label Grid.Row="1" FontFamily="Roboto-Bold" FontSize="22.9" Padding="16">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="30" FontFamily="Roboto-Bold" TextColor="#4CAF50"/>
+                                                        <Span Text=" Registros" FontFamily="Roboto-Regular" FontSize="16" TextColor="#546E7A"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                                
+                            </HorizontalStackLayout>
+                        </ScrollView>
+                
+            </VerticalStackLayout>
+        </contentViews:DashboardLayout.PageContent>
+        </contentViews:DashboardLayout>
+    </VerticalStackLayout>
+
+</ContentPage>

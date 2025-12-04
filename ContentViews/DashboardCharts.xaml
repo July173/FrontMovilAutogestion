@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AutogestionSenaMaui.ViewModels"
+             x:Class="AutogestionSenaMaui.ContentViews.DashboardCharts">
+  <ContentView.BindingContext>
+    <vm:DashboardChartsViewModel />
+  </ContentView.BindingContext>
+  <VerticalStackLayout Spacing="12" Padding="12">
+    <Label Text="Reportes" FontAttributes="Bold" FontSize="18"/>
+    <Frame CornerRadius="8" BackgroundColor="White" HasShadow="True">
+      <VerticalStackLayout Padding="10">
+        <Label Text="Chart placeholder (aquí se integrará Microcharts/SkiaSharp)" FontSize="14" TextColor="#6B7280"/>
+        <BoxView HeightRequest="160" Color="#F3F4F6" HorizontalOptions="FillAndExpand" Margin="0,8,0,0"/>
+      </VerticalStackLayout>
+    </Frame>
+  </VerticalStackLayout>
+</ContentView>

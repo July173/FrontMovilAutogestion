@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentViews="clr-namespace:AutogestionSenaMaui.ContentViews"
+             x:Class="AutogestionSenaMaui.Views.SofiaOperatorDashboardPage"
+             Title="Dashboard - Operador SofiaPlus">
+
+    <VerticalStackLayout>
+        <contentViews:DashboardLayout x:Name="DashboardLayout">
+            <contentViews:DashboardLayout.PageContent>
+                <ScrollView>
+                    <VerticalStackLayout Spacing="32" Padding="24">
+                        <!-- Panel Evolución Mensual de Procesos -->
+                        <Frame BackgroundColor="White" BorderColor="#E5E3E3" CornerRadius="12" Padding="25" Margin="0,0,0,24">
+                            <VerticalStackLayout Spacing="24">
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                                    <!-- Icono principal (placeholder) -->
+                                    <Frame BackgroundColor="#E0F2F1" CornerRadius="10" HeightRequest="40" WidthRequest="40" Padding="0" VerticalOptions="Center">
+                                        <!-- Icono aquí -->
+                                    </Frame>
+                                    <Label Text="Evolución Mensual de Procesos"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           TextColor="#263238"
+                                           VerticalOptions="Center"/>
+                                    <Frame BorderColor="#686868" CornerRadius="10" Padding="0" HeightRequest="48" WidthRequest="120" HorizontalOptions="End">
+                                        <HorizontalStackLayout Spacing="8" Padding="16,0">
+                                            <Label Text="2024" FontSize="16" TextColor="#757575" VerticalOptions="Center"/>
+                                            <!-- Icono selector año (placeholder) -->
+                                            <Frame BackgroundColor="#E0E0E0" CornerRadius="8" HeightRequest="16" WidthRequest="16" Padding="0" VerticalOptions="Center">
+                                                <!-- Icono aquí -->
+                                            </Frame>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                                <!-- Gráfico de evolución mensual (placeholder) -->
+                                <Frame BackgroundColor="#F5F5F5" CornerRadius="10" HeightRequest="300" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,10,0,0">
+                                    <Label Text="[Gráfico de evolución mensual aquí]" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#BDBDBD"/>
+                                </Frame>
+                                <!-- Leyenda -->
+                                <HorizontalStackLayout Spacing="30" Padding="0,10,0,0" HorizontalOptions="Center">
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Frame BackgroundColor="#1b9849" CornerRadius="7" HeightRequest="14" WidthRequest="14" Padding="0" VerticalOptions="Center"/>
+                                        <Label Text="Subidos" FontSize="16" TextColor="#1b9849" VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Frame BackgroundColor="#0288d1" CornerRadius="7" HeightRequest="14" WidthRequest="14" Padding="0" VerticalOptions="Center"/>
+                                        <Label Text="Pendientes" FontSize="16" TextColor="#0288d1" VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Panel Actividad reciente -->
+                        <Frame BackgroundColor="White" BorderColor="#E5E3E3" CornerRadius="12" Padding="25">
+                            <VerticalStackLayout Spacing="24">
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                                    <!-- Icono actividad (placeholder) -->
+                                    <Frame BackgroundColor="#E0F2F1" CornerRadius="10" HeightRequest="40" WidthRequest="40" Padding="0" VerticalOptions="Center">
+                                        <!-- Icono aquí -->
+                                    </Frame>
+                                    <Label Text="Actividad reciente"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           TextColor="#263238"
+                                           VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                                <!-- Lista de actividad reciente -->
+                                <VerticalStackLayout Spacing="16">
+                                    <!-- Item 1 -->
+                                    <Frame BorderColor="#E5E3E3" CornerRadius="12" Padding="17" Margin="0,0,0,0">
+                                        <HorizontalStackLayout Spacing="16" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                            <VerticalStackLayout Spacing="4" WidthRequest="180">
+                                                <Label Text="Juan Pérez González" FontSize="16" TextColor="#263238"/>
+                                                <Label Text="Ficha: 2845612" FontSize="14" TextColor="#757575"/>
+                                            </VerticalStackLayout>
+                                            <Frame BackgroundColor="#E8F5E9" CornerRadius="9999" Padding="11,3" VerticalOptions="Center">
+                                                <Label Text="Subido" FontSize="12" TextColor="#1b9849"/>
+                                            </Frame>
+                                            <Label Text="Hace 2 horas" FontSize="14" TextColor="#757575" VerticalOptions="Center"/>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                    <!-- Item 2 -->
+                                    <Frame BorderColor="#E5E3E3" CornerRadius="12" Padding="17" Margin="0,0,0,0">
+                                        <HorizontalStackLayout Spacing="16" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                            <VerticalStackLayout Spacing="4" WidthRequest="180">
+                                                <Label Text="Carlos Ruiz Jiménez" FontSize="16" TextColor="#263238"/>
+                                                <Label Text="Ficha: 2845614" FontSize="14" TextColor="#757575"/>
+                                            </VerticalStackLayout>
+                                            <Frame BackgroundColor="#E8F5E9" CornerRadius="9999" Padding="11,3" VerticalOptions="Center">
+                                                <Label Text="Subido" FontSize="12" TextColor="#1b9849"/>
+                                            </Frame>
+                                            <Label Text="Hace 5 horas" FontSize="14" TextColor="#757575" VerticalOptions="Center"/>
+                                        </HorizontalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </contentViews:DashboardLayout.PageContent>
+        </contentViews:DashboardLayout>
+    </VerticalStackLayout>
+
+</ContentPage>

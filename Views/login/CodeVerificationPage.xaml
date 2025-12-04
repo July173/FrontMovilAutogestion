@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutogestionSena.MAUI.Views.CodeVerificationPage"
+             BackgroundColor="White">
+    <ScrollView>
+      <Grid Padding="0" HorizontalOptions="FillAndExpand">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="0.05*"/>
+          <ColumnDefinition Width="0.9*"/>
+          <ColumnDefinition Width="0.05*"/>
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout Padding="20" Spacing="18" Grid.Column="1">
+                <!-- Volver -->
+                <Button x:Name="BackButton" Text="Volver"
+                    BackgroundColor="#43a047"
+                    TextColor="White"
+                    FontFamily="Roboto-Regular"
+                    FontSize="16"
+                    CornerRadius="10"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,10"/>
+            <!-- Logo -->
+            <Frame Padding="0" HasShadow="False" CornerRadius="60" HeightRequest="120" WidthRequest="120" BackgroundColor="Transparent" HorizontalOptions="Center">
+                <Image x:Name="LogoImage" Source="https://www.figma.com/api/mcp/asset/835afbaf-5f9f-40ba-a645-a69ea42f4d72" Aspect="AspectFill"/> 
+            </Frame>
+            <!-- Título -->
+                 <Label x:Name="TitleLabel" Text="AutoGestión CIES"
+                   FontFamily="Roboto-Bold"
+                     FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#43A047"
+                   HorizontalOptions="Center"/>
+            <!-- Subtítulo -->
+                 <Label x:Name="SubtitleLabel" Text="Código de verificación"
+                   FontFamily="Roboto-Bold"
+                     FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="#424242"
+                   HorizontalOptions="Center"/>
+                     <Label x:Name="InstructionLabel"
+                   Text="Ingresa el código que se te envió al correo electrónico"
+                   FontFamily="Roboto-Regular"
+                     FontSize="15"
+                   TextColor="#757575"
+                   HorizontalOptions="Center"/>
+            <!-- Input código -->
+            <Frame BorderColor="#e0e0e0" CornerRadius="8" BackgroundColor="White" Padding="0" HasShadow="False" HorizontalOptions="FillAndExpand">
+              <Grid Padding="10,8" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                    <Entry x:Name="CodeEntry" 
+   Placeholder="Código de recuperación" 
+  FontSize="16" 
+       TextColor="#90A4AE" 
+   FontFamily="Roboto-Regular" 
+  HorizontalOptions="FillAndExpand"
+          Keyboard="Numeric"
+    MaxLength="6"
+       TextChanged="OnCodeTextChanged"/>
+                </Grid>
+            </Frame>
+            <!-- Botón Verificar Código -->
+                    <Button x:Name="VerifyButton" Text="Verificar Código"
+                    BackgroundColor="#388e3c"
+                    TextColor="White"
+                    FontFamily="Roboto-SemiBold"
+                    FontSize="18"
+                    CornerRadius="8"
+                    HeightRequest="52"
+                    Margin="0,10,0,0"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnVerifyCodeClicked"/>
+            <!-- Soporte, Términos, Privacidad -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20" Margin="0,20,0,0">
+                <Label Text="Soporte" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+                <Label Text="Términos de Uso" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+                <Label Text="Política de Privacidad" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+            </HorizontalStackLayout>
+          </VerticalStackLayout>
+        </Grid>
+      </ScrollView>
+</ContentPage>

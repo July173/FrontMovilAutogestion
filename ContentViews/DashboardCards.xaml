@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AutogestionSenaMaui.ViewModels"
+             x:Class="AutogestionSenaMaui.ContentViews.DashboardCards">
+  <!-- Uses parent BindingContext (e.g., ApprenticeDashboardViewModel) -->
+  <ScrollView>
+    <VerticalStackLayout Padding="12" Spacing="12">
+      <Label Text="BIENVENIDO A AUTOGESTIÓN SENA" FontSize="22" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="#2E7D32"/>
+      <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" VerticalOptions="Start">
+        <!-- Card 1 -->
+        <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" WidthRequest="180" HeightRequest="140">
+          <VerticalStackLayout Padding="8">
+            <Label Text="Registro de" FontSize="12" HorizontalTextAlignment="End"/>
+            <Label Text="Aprendices" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+            <Label Text="{Binding ApprenticesCount}" FontSize="20" VerticalOptions="End" HorizontalTextAlignment="Start" TextColor="#2E7D32"/>
+            <Label Text="Aprendices Registrados" FontSize="12" TextColor="#6B7280"/>
+          </VerticalStackLayout>
+        </Frame>
+        <!-- Card 2 -->
+        <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" WidthRequest="200" HeightRequest="140">
+          <VerticalStackLayout Padding="8">
+            <Label Text="Registro de" FontSize="12" HorizontalTextAlignment="End"/>
+            <Label Text="Solicitudes sin asignar" FontSize="13" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+            <Label Text="{Binding UnassignedRequestsCount}" FontSize="20" VerticalOptions="End" HorizontalTextAlignment="Start" TextColor="#2E7D32"/>
+            <Label Text="Registros" FontSize="12" TextColor="#6B7280"/>
+          </VerticalStackLayout>
+        </Frame>
+        <!-- Card 3 -->
+        <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" WidthRequest="180" HeightRequest="140">
+          <VerticalStackLayout Padding="8">
+            <Label Text="Registro de" FontSize="12" HorizontalTextAlignment="End"/>
+            <Label Text="Solicitudes asignadas" FontSize="13" FontAttributes="Bold" HorizontalTextAlignment="End"/>
+            <Label Text="{Binding AssignedRequestsCount}" FontSize="20" VerticalOptions="End" HorizontalTextAlignment="Start" TextColor="#2E7D32"/>
+            <Label Text="Registros" FontSize="12" TextColor="#6B7280"/>
+          </VerticalStackLayout>
+        </Frame>
+      </HorizontalStackLayout>
+
+      <!-- Charts placeholders -->
+      <HorizontalStackLayout Spacing="12">
+        <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" WidthRequest="240" HeightRequest="260">
+          <VerticalStackLayout Padding="8">
+            <Label Text="Gráfica de asignaciones" FontAttributes="Bold"/>
+            <BoxView HeightRequest="160" Color="#F3F4F6" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Label Text="Actualizado" FontSize="12" TextColor="#6B7280"/>
+          </VerticalStackLayout>
+        </Frame>
+        <Frame BackgroundColor="White" CornerRadius="10" HasShadow="True" WidthRequest="240" HeightRequest="260">
+          <VerticalStackLayout Padding="8">
+            <Label Text="Gráfica de asignaciones aprobadas" FontAttributes="Bold"/>
+            <BoxView HeightRequest="160" Color="#F3F4F6" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+            <Label Text="Actualizado" FontSize="12" TextColor="#6B7280"/>
+          </VerticalStackLayout>
+        </Frame>
+      </HorizontalStackLayout>
+    </VerticalStackLayout>
+  </ScrollView>
+</ContentView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ContentViews.GenericNotificationView"
+             x:Name="NotificationView"
+             BackgroundColor="Transparent">
+    <Frame x:Name="NotificationFrame"
+           Padding="20"
+           CornerRadius="10"
+           BorderColor="Red"
+           BackgroundColor="#dcedf9"
+           HasShadow="True"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           WidthRequest="350">
+        <StackLayout Spacing="30" HorizontalOptions="Center">
+            <Image x:Name="IconImage" HeightRequest="80" WidthRequest="80" HorizontalOptions="Center"/>
+            <Label x:Name="TitleLabel"
+                   FontFamily="Roboto-SemiBold"
+                   FontSize="30"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold"/>
+            <Label x:Name="MessageLabel"
+                   FontFamily="Roboto-Medium"
+                   FontSize="24"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"
+                   LineBreakMode="WordWrap"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
+                <Button x:Name="PrimaryButton"
+                        Text="Aceptar"
+                        BackgroundColor="#43A047"
+                        TextColor="White"
+                        CornerRadius="7"
+                        Padding="23,6"
+                        FontFamily="Roboto-Medium"
+                        FontSize="20"
+                        Clicked="OnPrimaryButtonClicked"/>
+                <Button x:Name="SecondaryButton"
+                        Text="Cancelar"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        CornerRadius="7"
+                        Padding="23,6"
+                        FontFamily="Roboto-Medium"
+                        FontSize="20"
+                        Clicked="OnSecondaryButtonClicked"
+                        IsVisible="False"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</ContentView>

@@ -1,0 +1,17 @@
+{
+  "/home": "MainDashboard",
+  "/home/apprentice": "ApprenticeDashboardPage",
+  "/home/instructor": "InstructorDashboardPage",
+  "/home/coordinator": "CoordinatorDashboardPage",
+  "/home/sofia-operator": "SofiaOperatorDashboardPage",
+  "/request-registration": "NotImplemented",
+  "/mass-registration": "NotImplemented",
+  "/admin": "AdminDashboard",
+  "/reassign": "NotImplemented",
+  "/following": "NotImplemented",
+  "/following-history": "NotImplemented",
+  "/evaluate-final-visit": "NotImplemented",
+  "/assign": "NotImplemented",
+  "/register-ep": "NotImplemented",
+  "/application-evaluation": "NotImplemented"
+}

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutogestionSena.MAUI.Views.RegisterPage"
+             BackgroundColor="White">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,40" Spacing="30" HorizontalOptions="Center" MaximumWidthRequest="600">
+            <!-- Volver a inicio de sesión -->
+            <Button Text="Volver a inicio de sesión"
+                    BackgroundColor="#43a047"
+                    TextColor="White"
+                    FontFamily="Roboto-Regular"
+                    FontSize="20"
+                    CornerRadius="10"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,10"
+                    Clicked="OnBackToLoginClicked"/>
+            <!-- Logo -->
+            <Frame Padding="0" HasShadow="False" CornerRadius="40" HeightRequest="80" WidthRequest="80" BackgroundColor="Transparent" HorizontalOptions="Center">
+                <Image Source="https://www.figma.com/api/mcp/asset/3b20a39b-4857-475c-bf34-3f9d16456d70" Aspect="AspectFill" HeightRequest="80" WidthRequest="80"/>
+            </Frame>
+            <!-- Título -->
+            <Label Text="AutoGestión CIES"
+                   FontFamily="Roboto-Bold"
+                   FontSize="29"
+                   FontAttributes="Bold"
+                   TextColor="#43A047"
+                   HorizontalOptions="Center"/>
+            <!-- Subtítulo -->
+            <Label Text="Crear cuenta"
+                   FontFamily="Roboto-Bold"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#424242"
+                   HorizontalOptions="Center"/>
+            <Label Text="Ingresa tus datos para registrarte en la plataforma. Solo se deben registrar aprendices."
+                   FontFamily="Roboto-Regular"
+                   FontSize="20"
+                   TextColor="#757575"
+                   HorizontalOptions="Center"/>
+            <!-- Inputs -->
+            <VerticalStackLayout Spacing="16">
+                <!-- Correo -->
+                <Frame BorderColor="#e5e7eb" CornerRadius="6" Padding="0" HasShadow="False" BackgroundColor="White">
+                    <Grid Padding="10,0" HeightRequest="50" VerticalOptions="Center" BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="https://www.figma.com/api/mcp/asset/3b20a39b-4857-475c-bf34-3f9d16456d70" HeightRequest="25" WidthRequest="25" VerticalOptions="Center"/>
+                        <Entry x:Name="EmailEntry" Grid.Column="1" Placeholder="Correo institucional : ejemplo@soy.sena.edu.co" FontSize="13" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
+                    </Grid>
+                </Frame>
+                <!-- Nombres y Apellidos -->
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Column="0" BorderColor="#e5e7eb" CornerRadius="6" Padding="0" HasShadow="False" BackgroundColor="White">
+                        <Grid Padding="11,0" HeightRequest="50" VerticalOptions="Center" BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://www.figma.com/api/mcp/asset/0f0829bd-432e-45d6-bbe0-628aac067a51" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                            <Entry x:Name="NombresEntry" Grid.Column="1" Placeholder="Nombres" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Column="1" BorderColor="#e5e7eb" CornerRadius="6" Padding="0" HasShadow="False" BackgroundColor="White">
+                        <Grid Padding="11,0" HeightRequest="50" VerticalOptions="Center" BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://www.figma.com/api/mcp/asset/0f0829bd-432e-45d6-bbe0-628aac067a51" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                            <Entry x:Name="ApellidosEntry" Grid.Column="1" Placeholder="Apellidos" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <!-- Tipo de documento (Picker) -->
+                <Frame BorderColor="#c4c4c4" CornerRadius="10" Padding="0" HasShadow="False" BackgroundColor="White">
+                    <Grid Padding="10,0" HeightRequest="36" VerticalOptions="Center" BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Picker x:Name="TipoDocumentoPicker"
+                                Title="Tipo de documento"
+                                FontSize="20"
+                                TextColor="#424242"
+                                FontFamily="Roboto-Medium"
+                                BackgroundColor="White"
+                                ItemsSource="{Binding DocumentTypes}"
+                                ItemDisplayBinding="{Binding Name}"/>
+                        <Image Grid.Column="1" Source="https://www.figma.com/api/mcp/asset/eeef46d0-7bf3-4d46-89e8-c02c7446e708" HeightRequest="16" WidthRequest="16" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+                <!-- Número de documento y Teléfono -->
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame Grid.Column="0" BorderColor="#e5e7eb" CornerRadius="6" Padding="0" HasShadow="False" BackgroundColor="White">
+                        <Grid Padding="13,0" HeightRequest="50" VerticalOptions="Center" BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://www.figma.com/api/mcp/asset/8ff54c37-b100-4f2b-af9b-561ab83a9a18" HeightRequest="16" WidthRequest="16" VerticalOptions="Center"/>
+                            <Entry x:Name="DocumentoEntry" Grid.Column="1" Placeholder="Número de documento" FontSize="13" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White" Keyboard="Numeric"/>
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Column="1" BorderColor="#e5e7eb" CornerRadius="6" Padding="0" HasShadow="False" BackgroundColor="White">
+                        <Grid Padding="12,0" HeightRequest="50" VerticalOptions="Center" BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="https://www.figma.com/api/mcp/asset/b184b380-4530-446a-b126-00aa309fd6ed" HeightRequest="16" WidthRequest="16" VerticalOptions="Center"/>
+                            <Entry x:Name="TelefonoEntry" Grid.Column="1" Placeholder="Teléfono" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White" Keyboard="Telephone" MaxLength="10"/>
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <!-- Términos y condiciones -->
+                <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                    <CheckBox x:Name="TermsCheckbox" Color="#388e3c"/>
+                    <Label Text="Acepto los " FontSize="14" TextColor="#757575" FontFamily="Roboto-Regular" VerticalOptions="Center"/>
+                    <Label Text="términos y condiciones" FontSize="14" TextColor="#43a047" FontFamily="Roboto-Regular" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTermsClicked"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            <!-- Botón Registrarse -->
+            <Button x:Name="RegisterButton"
+                    Text="Registrarse"
+                    BackgroundColor="#388e3c"
+                    TextColor="White"
+                    FontFamily="Roboto-SemiBold"
+                    FontSize="30"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    Margin="0,10,0,0"
+                    Clicked="OnRegisterClicked"/>
+            <!-- Soporte, Términos, Privacidad -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20" Margin="0,20,0,0">
+                <Label Text="Soporte" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+                <Label Text="Términos de Uso" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+                <Label Text="Política de Privacidad" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

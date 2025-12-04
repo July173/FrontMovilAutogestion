@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:AutogestionSena.MAUI.Views"
+       xmlns:mauidash="clr-namespace:AutogestionSenaMaui.Views"
+       x:Class="AutogestionSena.MAUI.AppShell">
+
+    <!-- Rutas principales simplificadas -->
+    
+    <!-- ============================ -->
+    <!-- RUTAS PÚBLICAS (Autenticación) -->
+    <!-- ============================ -->
+    
+    <!-- Página de Login (Ruta por defecto) -->
+    <ShellContent Route="LoginPage" 
+                  ContentTemplate="{DataTemplate views:LoginPage}" />
+    
+    <!-- Registro de usuario -->
+    <ShellContent Route="RegisterPage" 
+                  ContentTemplate="{DataTemplate views:RegisterPage}" />
+    
+    <!-- Recuperación de contraseña -->
+    <ShellContent Route="PasswordRecoveryPage" 
+                  ContentTemplate="{DataTemplate views:PasswordRecoveryPage}" />
+    
+    <!-- Verificación de código 2FA -->
+    <ShellContent Route="CodeVerificationPage" 
+                  ContentTemplate="{DataTemplate views:CodeVerificationPage}" />
+    
+    <!-- Restablecer contraseña -->
+    <ShellContent Route="PasswordResetPage" 
+                  ContentTemplate="{DataTemplate views:PasswordResetPage}" />
+   
+    <!-- ============================ -->
+    <!-- RUTAS PROTEGIDAS -->
+    <!-- ============================ -->
+   
+    <!-- HomePage - Dashboard dinámico según rol con MainLayout integrado -->
+    <ShellContent Route="HomePage" 
+                  ContentTemplate="{DataTemplate mauidash:HomePage}" />
+    
+    
+
+</Shell>
