@@ -8,6 +8,10 @@ using AutogestionSena.MAUI.Api.Dtos;
 using Microsoft.Maui.Controls;
 using AutogestionSenaMaui.Helpers;
 using AutogestionSena.MAUI.Api;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 
 namespace AutogestionSenaMaui.Views
 {
@@ -223,37 +227,37 @@ namespace AutogestionSenaMaui.Views
                         .OrderByDescending(x => x.Count)
                         .ToList();
 
-                    var assignmentEntries = new List<Microcharts.ChartEntry>();
-                    foreach (var item in statusCounts)
+                    // Create bar chart series for assignments
+                    var barValues = statusCounts.Select(x => (double)x.Count).ToArray();
+                    var barLabels = statusCounts.Select(x => GetShortStatus(x.Status)).ToArray();
+
+                    if (!barValues.Any())
                     {
-                        assignmentEntries.Add(new Microcharts.ChartEntry(item.Count)
-                        {
-                            Label = GetShortStatus(item.Status),
-                            ValueLabel = item.Count.ToString(),
-                            Color = SkiaSharp.SKColor.Parse("#4CAF50")
-                        });
+                        barValues = new double[] { 0 };
+                        barLabels = new string[] { "Sin datos" };
                     }
 
-                    if (!assignmentEntries.Any())
+                    AssignmentsChart.Series = new ISeries[]
                     {
-                        assignmentEntries.Add(new Microcharts.ChartEntry(0)
+                        new ColumnSeries<double>
                         {
-                            Label = "Sin datos",
-                            ValueLabel = "0",
-                            Color = SkiaSharp.SKColor.Parse("#CCCCCC")
-                        });
-                    }
-
-                    AssignmentsChart.Chart = new Microcharts.BarChart
-                    {
-                        Entries = assignmentEntries,
-                        BackgroundColor = SkiaSharp.SKColors.White,
-                        LabelTextSize = 28,
-                        ValueLabelOrientation = Microcharts.Orientation.Horizontal,
-                        LabelOrientation = Microcharts.Orientation.Horizontal,
-                        IsAnimated = true
+                            Values = barValues,
+                            Fill = new SolidColorPaint(SKColor.Parse("#4CAF50")),
+                            Name = "Asignaciones"
+                        }
                     };
 
+                    AssignmentsChart.XAxes = new Axis[]
+                    {
+                        new Axis
+                        {
+                            Labels = barLabels,
+                            LabelsRotation = 0,
+                            TextSize = 12
+                        }
+                    };
+
+                    // Line chart for approved over time
                     var allByMonth = assignments
                         .Where(a => a.CreatedAt.HasValue)
                         .GroupBy(a => new { Year = a.CreatedAt.Value.Year, Month = a.CreatedAt.Value.Month })
@@ -266,50 +270,65 @@ namespace AutogestionSenaMaui.Views
                         .TakeLast(6)
                         .ToList();
 
-                    var approvedEntries = new List<Microcharts.ChartEntry>();
+                    double[] lineValues;
+                    string[] lineLabels;
 
                     if (allByMonth.Any())
                     {
-                        foreach (var item in allByMonth)
-                        {
-                            approvedEntries.Add(new Microcharts.ChartEntry(item.Count)
-                            {
-                                Label = item.Date.ToString("MMM"),
-                                ValueLabel = item.Count.ToString(),
-                                Color = SkiaSharp.SKColor.Parse("#2196F3")
-                            });
-                        }
+                        lineValues = allByMonth.Select(x => (double)x.Count).ToArray();
+                        lineLabels = allByMonth.Select(x => x.Date.ToString("MMM")).ToArray();
                     }
                     else
                     {
-                        approvedEntries.Add(new Microcharts.ChartEntry(0)
-                        {
-                            Label = "Sin datos",
-                            ValueLabel = "0",
-                            Color = SkiaSharp.SKColor.Parse("#CCCCCC")
-                        });
+                        lineValues = new double[] { 0 };
+                        lineLabels = new string[] { "Sin datos" };
                     }
 
-                    ApprovedChart.Chart = new Microcharts.LineChart
+                    ApprovedChart.Series = new ISeries[]
                     {
-                        Entries = approvedEntries,
-                        BackgroundColor = SkiaSharp.SKColors.White,
-                        LabelTextSize = 28,
-                        LineMode = Microcharts.LineMode.Straight,
-                        PointMode = Microcharts.PointMode.Circle,
-                        PointSize = 15,
-                        IsAnimated = true
+                        new LineSeries<double>
+                        {
+                            Values = lineValues,
+                            Stroke = new SolidColorPaint(SKColor.Parse("#2196F3")) { StrokeThickness = 3 },
+                            Fill = null,
+                            GeometryFill = new SolidColorPaint(SKColor.Parse("#2196F3")),
+                            GeometrySize = 10,
+                            Name = "Solicitudes"
+                        }
+                    };
+
+                    ApprovedChart.XAxes = new Axis[]
+                    {
+                        new Axis
+                        {
+                            Labels = lineLabels,
+                            LabelsRotation = 0,
+                            TextSize = 12
+                        }
                     };
                 }
                 else
                 {
-                    var emptyEntry = new List<Microcharts.ChartEntry>
+                    // Empty charts
+                    AssignmentsChart.Series = new ISeries[]
                     {
-                        new Microcharts.ChartEntry(0) { Label = "Sin datos", ValueLabel = "0", Color = SkiaSharp.SKColor.Parse("#CCCCCC") }
+                        new ColumnSeries<double>
+                        {
+                            Values = new double[] { 0 },
+                            Fill = new SolidColorPaint(SKColor.Parse("#CCCCCC")),
+                            Name = "Sin datos"
+                        }
                     };
 
-                    AssignmentsChart.Chart = new Microcharts.BarChart { Entries = emptyEntry };
-                    ApprovedChart.Chart = new Microcharts.LineChart { Entries = emptyEntry };
+                    ApprovedChart.Series = new ISeries[]
+                    {
+                        new LineSeries<double>
+                        {
+                            Values = new double[] { 0 },
+                            Stroke = new SolidColorPaint(SKColor.Parse("#CCCCCC")),
+                            Name = "Sin datos"
+                        }
+                    };
                 }
             }
             catch (Exception)

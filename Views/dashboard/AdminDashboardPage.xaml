@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:contentViews="clr-namespace:AutogestionSenaMaui.ContentViews"
-             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:Class="AutogestionSenaMaui.Views.AdminDashboardPage"
              Title="Dashboard - Administración"
              BackgroundColor="#F5F5F5">
@@ -198,7 +198,7 @@
                                        HorizontalTextAlignment="Center"/>
 
                                 <!-- Contenedor de la gráfica -->
-                                <microcharts:ChartView x:Name="AssignmentsChart"
+                                <lvc:CartesianChart x:Name="AssignmentsChart"
                                                        HeightRequest="200"
                                                        Margin="0,8,0,0"/>
 
@@ -231,7 +231,7 @@
                                        HorizontalTextAlignment="Center"/>
 
                                 <!-- Contenedor de la gráfica -->
-                                <microcharts:ChartView x:Name="ApprovedChart"
+                                <lvc:CartesianChart x:Name="ApprovedChart"
                                                        HeightRequest="200"
                                                        Margin="0,8,0,0"/>
 
