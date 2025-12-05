@@ -34,7 +34,7 @@
  <HorizontalStackLayout>
  <Label Text="Visitas programadas" FontSize="15" TextColor="#222" />
  <Frame BackgroundColor="#A5EEC5" CornerRadius="16" HeightRequest="32" WidthRequest="32" Padding="0" HasShadow="False" HorizontalOptions="End">
- <Label Text="&#x1F4C5;" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
+ <Label Text="&#xf274;" FontFamily="FA_Solid" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
  </Frame>
  </HorizontalStackLayout>
  <Label Text="2" FontSize="22" FontAttributes="Bold" TextColor="#222" />
@@ -52,7 +52,7 @@
  <HorizontalStackLayout>
  <Label Text="Aprendices Asignados" FontSize="15" TextColor="#222" />
  <Frame BackgroundColor="#A5EEC5" CornerRadius="16" HeightRequest="32" WidthRequest="32" Padding="0" HasShadow="False" HorizontalOptions="End">
- <Label Text="&#x1F393;" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
+ <Label Text="&#xf501;" FontFamily="FA_Solid" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
  </Frame>
  </HorizontalStackLayout>
  <Label Text="2" FontSize="22" FontAttributes="Bold" TextColor="#222" />
@@ -70,7 +70,7 @@
  <HorizontalStackLayout>
  <Label Text="Aprendices Evaluados" FontSize="15" TextColor="#222" />
  <Frame BackgroundColor="#A5EEC5" CornerRadius="16" HeightRequest="32" WidthRequest="32" Padding="0" HasShadow="False" HorizontalOptions="End">
- <Label Text="&#x1F9D1;" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
+ <Label Text="&#xf4fc;" FontFamily="FA_Solid" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
  </Frame>
  </HorizontalStackLayout>
  <Label Text="2" FontSize="22" FontAttributes="Bold" TextColor="#222" />
@@ -103,7 +103,7 @@
  Padding="0"
  HasShadow="False"
  VerticalOptions="Center">
- <Label Text="&#x1F4C5;" FontSize="22" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#2E7D32" />
+ <Label Text="&#xf274;" FontFamily="FA_Solid" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#2E7D32" />
  </Frame>
  <Label Text="Visita programada"
  FontSize="20"
@@ -117,7 +117,7 @@
  TextColor="#222"
  Margin="0,0,0,2" />
  <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#x1F9D1;&#x200D;&#x1F4BB;" FontSize="16" TextColor="#2E7D32" VerticalOptions="Center" />
+ <Label Text="&#xf007;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
  <Label Text="Carlos ruiz :11292221893"
  FontSize="15"
  TextColor="#222"
@@ -133,7 +133,7 @@
  FontAttributes="Bold"
  Margin="0,0,0,4" />
  <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#x23F0;" FontSize="16" TextColor="#2E7D32" VerticalOptions="Center" />
+ <Label Text="&#xf017;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
  <Label Text="Mañana"
  FontSize="15"
  TextColor="#222"
@@ -169,7 +169,7 @@
  Padding="0"
  HasShadow="False"
  VerticalOptions="Center">
- <Label Text="&#x1F4C5;" FontSize="22" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#2E7D32" />
+ <Label Text="&#xf274;" FontFamily="FA_Solid" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#2E7D32" />
  </Frame>
  <Label Text="Visita programada"
  FontSize="20"
@@ -183,7 +183,7 @@
  TextColor="#222"
  Margin="0,0,0,2" />
  <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#x1F9D1;&#x200D;&#x1F4BB;" FontSize="16" TextColor="#2E7D32" VerticalOptions="Center" />
+ <Label Text="&#xf007;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
  <Label Text="Carlos ruiz :11292221893"
  FontSize="15"
  TextColor="#222"
@@ -199,7 +199,7 @@
  FontAttributes="Bold"
  Margin="0,0,0,4" />
  <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#x23F0;" FontSize="16" TextColor="#2E7D32" VerticalOptions="Center" />
+ <Label Text="&#xf017;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
  <Label Text="Mañana"
  FontSize="15"
  TextColor="#222"
