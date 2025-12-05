@@ -26,7 +26,7 @@
                                        HorizontalOptions="Center"
                                        FontFamily="Roboto-Bold"/>
                                 <Label x:Name="UserEmailLabel"
-                                       Text="Hola, usuario@sena.edu.co"
+                                       Text="Hola, un gusto verte de nuevo."
                                        FontSize="16"
                                        TextColor="#43A047"
                                        HorizontalOptions="Center"
