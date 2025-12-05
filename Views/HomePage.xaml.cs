@@ -365,7 +365,8 @@ namespace AutogestionSenaMaui.Views
         /// </summary>
         private View CreateSofiaOperatorDashboard()
         {
-            return CreateGenericDashboard();
+            var sofiaOperatorPage = new SofiaOperatorDashboardPage();
+            return sofiaOperatorPage.Content;
         }
 
         /// <summary>
