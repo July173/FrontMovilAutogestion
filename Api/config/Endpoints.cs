@@ -199,5 +199,11 @@ namespace AutogestionSena.MAUI.Api
             public static string LegalDocuments => $"{API_BASE_URL}general/legal-documents/";
             public static string LegalSections => $"{API_BASE_URL}general/legal-sections/";
         }
+
+        // Endpoints del operador Sofia
+        public static class SofiaOperator
+        {
+            public static string Dashboard => $"{API_BASE_URL}assign/request_asignation/operator-sofia-dashboard/";
+        }
     }
 }

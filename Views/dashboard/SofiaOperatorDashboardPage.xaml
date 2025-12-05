@@ -3,103 +3,382 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:contentViews="clr-namespace:AutogestionSenaMaui.ContentViews"
              x:Class="AutogestionSenaMaui.Views.SofiaOperatorDashboardPage"
-             Title="Dashboard - Operador SofiaPlus">
+             Title="Dashboard - Operador SofiaPlus"
+             BackgroundColor="#F5F5F5">
 
     <VerticalStackLayout>
         <contentViews:DashboardLayout x:Name="DashboardLayout">
             <contentViews:DashboardLayout.PageContent>
                 <ScrollView>
-                    <VerticalStackLayout Spacing="32" Padding="24">
-                        <!-- Panel Evolución Mensual de Procesos -->
-                        <Frame BackgroundColor="White" BorderColor="#E5E3E3" CornerRadius="12" Padding="25" Margin="0,0,0,24">
-                            <VerticalStackLayout Spacing="24">
-                                <HorizontalStackLayout Spacing="8" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                                    <!-- Icono principal (placeholder) -->
-                                    <Frame BackgroundColor="#E0F2F1" CornerRadius="10" HeightRequest="40" WidthRequest="40" Padding="0" VerticalOptions="Center">
-                                        <!-- Icono aquí -->
-                                    </Frame>
-                                    <Label Text="Evolución Mensual de Procesos"
-                                           FontSize="24"
-                                           FontAttributes="Bold"
-                                           TextColor="#263238"
-                                           VerticalOptions="Center"/>
-                                    <Frame BorderColor="#686868" CornerRadius="10" Padding="0" HeightRequest="48" WidthRequest="120" HorizontalOptions="End">
-                                        <HorizontalStackLayout Spacing="8" Padding="16,0">
-                                            <Label Text="2024" FontSize="16" TextColor="#757575" VerticalOptions="Center"/>
-                                            <!-- Icono selector año (placeholder) -->
-                                            <Frame BackgroundColor="#E0E0E0" CornerRadius="8" HeightRequest="16" WidthRequest="16" Padding="0" VerticalOptions="Center">
-                                                <!-- Icono aquí -->
-                                            </Frame>
-                                        </HorizontalStackLayout>
-                                    </Frame>
-                                </HorizontalStackLayout>
-                                <!-- Gráfico de evolución mensual (placeholder) -->
-                                <Frame BackgroundColor="#F5F5F5" CornerRadius="10" HeightRequest="300" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,10,0,0">
-                                    <Label Text="[Gráfico de evolución mensual aquí]" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#BDBDBD"/>
-                                </Frame>
-                                <!-- Leyenda -->
-                                <HorizontalStackLayout Spacing="30" Padding="0,10,0,0" HorizontalOptions="Center">
-                                    <HorizontalStackLayout Spacing="8">
-                                        <Frame BackgroundColor="#1b9849" CornerRadius="7" HeightRequest="14" WidthRequest="14" Padding="0" VerticalOptions="Center"/>
-                                        <Label Text="Subidos" FontSize="16" TextColor="#1b9849" VerticalOptions="Center"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout Spacing="8">
-                                        <Frame BackgroundColor="#0288d1" CornerRadius="7" HeightRequest="14" WidthRequest="14" Padding="0" VerticalOptions="Center"/>
-                                        <Label Text="Pendientes" FontSize="16" TextColor="#0288d1" VerticalOptions="Center"/>
-                                    </HorizontalStackLayout>
-                                </HorizontalStackLayout>
+                    <VerticalStackLayout Spacing="20" Padding="20">
+                        
+                        <!-- Encabezado de bienvenida -->
+                        <Border BackgroundColor="White" 
+                                StrokeShape="RoundRectangle 12" 
+                                Stroke="#E5E3E3" 
+                                StrokeThickness="1"
+                                Padding="24">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="BIENVENIDO A AUTOGESTIÓN SENA"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       TextColor="#1B5E20"
+                                       HorizontalOptions="Center"
+                                       FontFamily="Roboto-Bold"/>
+                                <Label x:Name="UserEmailLabel"
+                                       Text="Hola, usuario@sena.edu.co"
+                                       FontSize="16"
+                                       TextColor="#43A047"
+                                       HorizontalOptions="Center"
+                                       FontFamily="Roboto-Regular"/>
                             </VerticalStackLayout>
-                        </Frame>
+                        </Border>
 
-                        <!-- Panel Actividad reciente -->
-                        <Frame BackgroundColor="White" BorderColor="#E5E3E3" CornerRadius="12" Padding="25">
-                            <VerticalStackLayout Spacing="24">
-                                <HorizontalStackLayout Spacing="8" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                                    <!-- Icono actividad (placeholder) -->
-                                    <Frame BackgroundColor="#E0F2F1" CornerRadius="10" HeightRequest="40" WidthRequest="40" Padding="0" VerticalOptions="Center">
-                                        <!-- Icono aquí -->
-                                    </Frame>
-                                    <Label Text="Actividad reciente"
-                                           FontSize="24"
-                                           FontAttributes="Bold"
-                                           TextColor="#263238"
-                                           VerticalOptions="Center"/>
+                        <!-- Tarjetas de estadísticas -->
+                        <Grid ColumnSpacing="15" RowSpacing="15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Tarjeta Registrados -->
+                            <Border Grid.Column="0" 
+                                    BackgroundColor="White" 
+                                    StrokeShape="RoundRectangle 12" 
+                                    Stroke="#E5E3E3" 
+                                    StrokeThickness="1"
+                                    Padding="16"
+                                    HeightRequest="100">
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icono check verde -->
+                                    <Border Grid.Column="0"
+                                            BackgroundColor="#E8F5E9"
+                                            StrokeShape="RoundRectangle 25"
+                                            Stroke="Transparent"
+                                            HeightRequest="50"
+                                            WidthRequest="50"
+                                            VerticalOptions="Center">
+                                        <Label Text="&#xf00c;"
+                                               FontFamily="FA_Solid"
+                                               FontSize="24"
+                                               TextColor="#43A047"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Border>
+                                    
+                                    <VerticalStackLayout Grid.Column="1" 
+                                                        VerticalOptions="Center"
+                                                        Spacing="4">
+                                        <Label Text="Registrados"
+                                               FontSize="14"
+                                               TextColor="#757575"
+                                               FontFamily="Roboto-Regular"/>
+                                        <Label x:Name="RegisteredLabel"
+                                               Text="0"
+                                               FontSize="28"
+                                               FontAttributes="Bold"
+                                               TextColor="#43A047"
+                                               FontFamily="Roboto-Bold"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+
+                            <!-- Tarjeta Pendientes -->
+                            <Border Grid.Column="1" 
+                                    BackgroundColor="White" 
+                                    StrokeShape="RoundRectangle 12" 
+                                    Stroke="#E5E3E3" 
+                                    StrokeThickness="1"
+                                    Padding="16"
+                                    HeightRequest="100">
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icono minus azul -->
+                                    <Border Grid.Column="0"
+                                            BackgroundColor="#E3F2FD"
+                                            StrokeShape="RoundRectangle 25"
+                                            Stroke="#90CAF9"
+                                            StrokeThickness="2"
+                                            HeightRequest="50"
+                                            WidthRequest="50"
+                                            VerticalOptions="Center">
+                                        <Label Text="&#xf068;"
+                                               FontFamily="FA_Solid"
+                                               FontSize="20"
+                                               TextColor="#1976D2"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Border>
+                                    
+                                    <VerticalStackLayout Grid.Column="1" 
+                                                        VerticalOptions="Center"
+                                                        Spacing="4">
+                                        <Label Text="Pendientes"
+                                               FontSize="14"
+                                               TextColor="#757575"
+                                               FontFamily="Roboto-Regular"/>
+                                        <Label x:Name="PendingLabel"
+                                               Text="0"
+                                               FontSize="28"
+                                               FontAttributes="Bold"
+                                               TextColor="#1976D2"
+                                               FontFamily="Roboto-Bold"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+
+                            <!-- Tarjeta Total -->
+                            <Border Grid.Column="2" 
+                                    BackgroundColor="White" 
+                                    StrokeShape="RoundRectangle 12" 
+                                    Stroke="#E5E3E3" 
+                                    StrokeThickness="1"
+                                    Padding="16"
+                                    HeightRequest="100">
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Icono grid azul oscuro -->
+                                    <Border Grid.Column="0"
+                                            BackgroundColor="#E8EAF6"
+                                            StrokeShape="RoundRectangle 25"
+                                            Stroke="Transparent"
+                                            HeightRequest="50"
+                                            WidthRequest="50"
+                                            VerticalOptions="Center">
+                                        <Label Text="&#xf00a;"
+                                               FontFamily="FA_Solid"
+                                               FontSize="22"
+                                               TextColor="#3F51B5"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Border>
+                                    
+                                    <VerticalStackLayout Grid.Column="1" 
+                                                        VerticalOptions="Center"
+                                                        Spacing="4">
+                                        <Label Text="Total"
+                                               FontSize="14"
+                                               TextColor="#757575"
+                                               FontFamily="Roboto-Regular"/>
+                                        <Label x:Name="TotalLabel"
+                                               Text="0"
+                                               FontSize="28"
+                                               FontAttributes="Bold"
+                                               TextColor="#3F51B5"
+                                               FontFamily="Roboto-Bold"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <!-- Panel Evolución Mensual de Registros -->
+                        <Border BackgroundColor="White" 
+                                StrokeShape="RoundRectangle 12" 
+                                Stroke="#E5E3E3" 
+                                StrokeThickness="1"
+                                Padding="24">
+                            <VerticalStackLayout Spacing="20">
+                                <!-- Encabezado del panel -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <HorizontalStackLayout Grid.Column="0" Spacing="10" VerticalOptions="Center">
+                                        <!-- Icono de gráfico -->
+                                        <Label Text="&#xf201;"
+                                               FontFamily="FA_Solid"
+                                               FontSize="20"
+                                               TextColor="#43A047"
+                                               VerticalOptions="Center"/>
+                                        <Label Text="Evolución Mensual de Registros"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="#263238"
+                                               VerticalOptions="Center"
+                                               FontFamily="Roboto-Bold"/>
+                                    </HorizontalStackLayout>
+
+                                    <!-- Selector de año -->
+                                    <Border Grid.Column="2"
+                                            StrokeShape="RoundRectangle 8"
+                                            Stroke="#E0E0E0"
+                                            StrokeThickness="1"
+                                            Padding="12,8"
+                                            BackgroundColor="White">
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Label Text="Año:"
+                                                   FontSize="14"
+                                                   TextColor="#757575"
+                                                   VerticalOptions="Center"
+                                                   FontFamily="Roboto-Regular"/>
+                                            <Label x:Name="YearLabel"
+                                                   Text="2025"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#424242"
+                                                   VerticalOptions="Center"
+                                                   FontFamily="Roboto-Bold"/>
+                                        </HorizontalStackLayout>
+                                    </Border>
+                                </Grid>
+
+                                <!-- Área del gráfico -->
+                                <Border BackgroundColor="#FAFAFA"
+                                        StrokeShape="RoundRectangle 8"
+                                        Stroke="#E0E0E0"
+                                        StrokeThickness="1"
+                                        Padding="16"
+                                        HeightRequest="280">
+                                    <Grid>
+                                        <!-- Gráfico de barras -->
+                                        <VerticalStackLayout Spacing="10" VerticalOptions="End">
+                                            <!-- Área de barras -->
+                                            <Grid x:Name="ChartGrid" HeightRequest="200">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                            </Grid>
+                                            
+                                            <!-- Etiquetas de meses -->
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="Ene" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="1" Text="Feb" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="2" Text="Mar" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="3" Text="Abr" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="4" Text="May" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="5" Text="Jun" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="6" Text="Jul" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="7" Text="Ago" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="8" Text="Sep" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="9" Text="Oct" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="10" Text="Nov" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                                <Label Grid.Column="11" Text="Dic" FontSize="10" TextColor="#9E9E9E" HorizontalOptions="Center"/>
+                                            </Grid>
+                                        </VerticalStackLayout>
+
+                                        <!-- Indicador de carga -->
+                                        <ActivityIndicator x:Name="ChartLoadingIndicator"
+                                                          IsRunning="False"
+                                                          IsVisible="False"
+                                                          Color="#43A047"
+                                                          HorizontalOptions="Center"
+                                                          VerticalOptions="Center"/>
+
+                                        <!-- Mensaje cuando no hay datos -->
+                                        <Label x:Name="NoDataLabel"
+                                               Text="No hay datos disponibles"
+                                               FontSize="14"
+                                               TextColor="#9E9E9E"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               IsVisible="False"
+                                               FontFamily="Roboto-Regular"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Leyenda -->
+                                <HorizontalStackLayout Spacing="30" HorizontalOptions="Center">
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Border BackgroundColor="#43A047" 
+                                                StrokeShape="RoundRectangle 7" 
+                                                HeightRequest="14" 
+                                                WidthRequest="14"/>
+                                        <Label Text="Registrados" 
+                                               FontSize="14" 
+                                               TextColor="#424242"
+                                               FontFamily="Roboto-Regular"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Border BackgroundColor="#1976D2" 
+                                                StrokeShape="RoundRectangle 7" 
+                                                HeightRequest="14" 
+                                                WidthRequest="14"/>
+                                        <Label Text="Pendientes" 
+                                               FontSize="14" 
+                                               TextColor="#424242"
+                                               FontFamily="Roboto-Regular"/>
+                                    </HorizontalStackLayout>
                                 </HorizontalStackLayout>
-                                <!-- Lista de actividad reciente -->
-                                <VerticalStackLayout Spacing="16">
-                                    <!-- Item 1 -->
-                                    <Frame BorderColor="#E5E3E3" CornerRadius="12" Padding="17" Margin="0,0,0,0">
-                                        <HorizontalStackLayout Spacing="16" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                            <VerticalStackLayout Spacing="4" WidthRequest="180">
-                                                <Label Text="Juan Pérez González" FontSize="16" TextColor="#263238"/>
-                                                <Label Text="Ficha: 2845612" FontSize="14" TextColor="#757575"/>
-                                            </VerticalStackLayout>
-                                            <Frame BackgroundColor="#E8F5E9" CornerRadius="9999" Padding="11,3" VerticalOptions="Center">
-                                                <Label Text="Subido" FontSize="12" TextColor="#1b9849"/>
-                                            </Frame>
-                                            <Label Text="Hace 2 horas" FontSize="14" TextColor="#757575" VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
-                                    </Frame>
-                                    <!-- Item 2 -->
-                                    <Frame BorderColor="#E5E3E3" CornerRadius="12" Padding="17" Margin="0,0,0,0">
-                                        <HorizontalStackLayout Spacing="16" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                            <VerticalStackLayout Spacing="4" WidthRequest="180">
-                                                <Label Text="Carlos Ruiz Jiménez" FontSize="16" TextColor="#263238"/>
-                                                <Label Text="Ficha: 2845614" FontSize="14" TextColor="#757575"/>
-                                            </VerticalStackLayout>
-                                            <Frame BackgroundColor="#E8F5E9" CornerRadius="9999" Padding="11,3" VerticalOptions="Center">
-                                                <Label Text="Subido" FontSize="12" TextColor="#1b9849"/>
-                                            </Frame>
-                                            <Label Text="Hace 5 horas" FontSize="14" TextColor="#757575" VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
-                                    </Frame>
-                                </VerticalStackLayout>
                             </VerticalStackLayout>
-                        </Frame>
+                        </Border>
+
+                        <!-- Indicador de carga general -->
+                        <ActivityIndicator x:Name="LoadingIndicator"
+                                          IsRunning="False"
+                                          IsVisible="False"
+                                          Color="#43A047"
+                                          HeightRequest="50"
+                                          WidthRequest="50"
+                                          HorizontalOptions="Center"/>
+
+                        <!-- Mensaje de error -->
+                        <Border x:Name="ErrorBorder"
+                                BackgroundColor="#FFEBEE"
+                                StrokeShape="RoundRectangle 8"
+                                Stroke="#EF5350"
+                                StrokeThickness="1"
+                                Padding="16"
+                                IsVisible="False">
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="&#xf071;"
+                                       FontFamily="FA_Solid"
+                                       FontSize="18"
+                                       TextColor="#D32F2F"
+                                       VerticalOptions="Center"/>
+                                <Label x:Name="ErrorLabel"
+                                       Text=""
+                                       FontSize="14"
+                                       TextColor="#D32F2F"
+                                       VerticalOptions="Center"
+                                       FontFamily="Roboto-Regular"/>
+                            </HorizontalStackLayout>
+                        </Border>
+
                     </VerticalStackLayout>
                 </ScrollView>
             </contentViews:DashboardLayout.PageContent>
         </contentViews:DashboardLayout>
     </VerticalStackLayout>
-
 </ContentPage>
