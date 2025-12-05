@@ -44,8 +44,8 @@
                                             <Border.StrokeShape>
                                                 <RoundRectangle CornerRadius="12"/>
                                             </Border.StrokeShape>
-                                            <Label Text="&#xf4da;"
-                                                   FontFamily="BootstrapIcons"
+                                            <Label Text="&#xf007;"
+                                                   FontFamily="FA_Solid"
                                                    FontSize="24"
                                                    TextColor="White"
                                                    HorizontalOptions="Center"
@@ -108,8 +108,8 @@
                                             <Border.StrokeShape>
                                                 <RoundRectangle CornerRadius="12"/>
                                             </Border.StrokeShape>
-                                            <Label Text="&#xf5ec;"
-                                                   FontFamily="BootstrapIcons"
+                                            <Label Text="&#xf46d;"
+                                                   FontFamily="FA_Solid"
                                                    FontSize="24"
                                                    TextColor="White"
                                                    HorizontalOptions="Center"
@@ -165,8 +165,8 @@
                                             <Border.StrokeShape>
                                                 <RoundRectangle CornerRadius="12"/>
                                             </Border.StrokeShape>
-                                            <Label Text="&#xf4e6;"
-                                                   FontFamily="BootstrapIcons"
+                                            <Label Text="&#xf500;"
+                                                   FontFamily="FA_Solid"
                                                    FontSize="24"
                                                    TextColor="White"
                                                    HorizontalOptions="Center"

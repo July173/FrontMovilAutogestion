@@ -3,7 +3,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AutogestionSena.MAUI.Views"
-             xmlns:helpers="clr-namespace:AutogestionSenaMaui.Helpers"
              x:Class="AutogestionSena.MAUI.Views.LoginPage"
              BackgroundColor="White">
     <Grid>
@@ -41,7 +40,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="https://www.figma.com/api/mcp/asset/748ee653-82c0-4e01-8913-4ce3bd25dea5" HeightRequest="35" WidthRequest="35" VerticalOptions="Center"/>
+                        <Label Text="&#xf0e0;" FontFamily="FA_Solid" FontSize="20" TextColor="#757575" VerticalOptions="Center" Margin="0,0,10,0"/>
                         <Entry x:Name="UsernameEntry" Grid.Column="1" Placeholder="ejemplo@soy.sena.edu.co" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
                     </Grid>
                 </Frame>
@@ -52,13 +51,12 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="https://www.figma.com/api/mcp/asset/e55a7151-6e91-40a1-8a59-4b0c738c425e" HeightRequest="35" WidthRequest="35" VerticalOptions="Center"/>
+                        <Label Text="&#xf023;" FontFamily="FA_Solid" FontSize="20" TextColor="#757575" VerticalOptions="Center" Margin="0,0,10,0"/>
                         <Entry x:Name="PasswordEntry" Grid.Column="1" Placeholder="Contraseña" IsPassword="True" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
                     </Grid>
                 </Frame>
             </VerticalStackLayout>
             <!-- ¿Olvidaste tu contraseña? -->
-                <Image Source="{x:Static helpers:IconPaths.House}" HeightRequest="32" WidthRequest="32"/>
                 <Label Text="¿Olvidaste tu contraseña?" FontFamily="Roboto-Bold" FontSize="18" TextColor="#43A047" HorizontalOptions="Center">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnForgotPasswordTapped"/>
@@ -88,14 +86,31 @@
             </HorizontalStackLayout>
             <!-- Soporte, Términos, Privacidad -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20" Margin="0,20,0,0">
-                <Label Text="Soporte" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
-                <Label Text="Términos de Uso" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
-                <Label Text="Política de Privacidad" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+                <Label Text="Soporte" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSupportTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Términos de Uso" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTermsTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Política de Privacidad" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPrivacyTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
         
         <!-- Modal de segundo factor -->
         <local:TwoFactorModal x:Name="TwoFactorModal" />
+        
+        <!-- Modales de Términos, Privacidad y Soporte -->
+        <local:SupportModalView x:Name="SupportModalView" />
+        <local:LegalModalView x:Name="LegalModalView" />
+        <local:PrivacyModalView x:Name="PrivacyModalView" />
     </Grid>
 </ContentPage>

@@ -189,5 +189,15 @@ namespace AutogestionSena.MAUI.Api
             public static string DeleteByUser => $"{API_BASE_URL}general/notifications/delete-by-user/";
             public static string GetById(int id) => $"{API_BASE_URL}general/notifications/{id}/";
         }
+
+        // Endpoints generales para soporte y documentos legales
+        public static class General
+        {
+            public static string TypeOfQueries => $"{API_BASE_URL}general/type-of-queries/";
+            public static string SupportContacts => $"{API_BASE_URL}general/support-contacts/";
+            public static string SupportSchedules => $"{API_BASE_URL}general/support-schedules/";
+            public static string LegalDocuments => $"{API_BASE_URL}general/legal-documents/";
+            public static string LegalSections => $"{API_BASE_URL}general/legal-sections/";
+        }
     }
 }
