@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AutogestionSena.MAUI.Views"
              x:Class="AutogestionSena.MAUI.Views.RegisterPage"
              BackgroundColor="White">
+    <Grid>
     <ScrollView>
         <VerticalStackLayout Padding="30,40" Spacing="30" HorizontalOptions="Center" MaximumWidthRequest="600">
             <!-- Volver a inicio de sesión -->
@@ -48,7 +50,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="https://www.figma.com/api/mcp/asset/3b20a39b-4857-475c-bf34-3f9d16456d70" HeightRequest="25" WidthRequest="25" VerticalOptions="Center"/>
+                        <Label Text="&#xf0e0;" FontFamily="FA_Solid" FontSize="20" TextColor="#757575" VerticalOptions="Center" Margin="0,0,10,0"/>
                         <Entry x:Name="EmailEntry" Grid.Column="1" Placeholder="Correo institucional : ejemplo@soy.sena.edu.co" FontSize="13" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
                     </Grid>
                 </Frame>
@@ -64,7 +66,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="https://www.figma.com/api/mcp/asset/0f0829bd-432e-45d6-bbe0-628aac067a51" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                            <Label Text="&#xf007;" FontFamily="FA_Solid" FontSize="18" TextColor="#757575" VerticalOptions="Center" Margin="0,0,8,0"/>
                             <Entry x:Name="NombresEntry" Grid.Column="1" Placeholder="Nombres" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
                         </Grid>
                     </Frame>
@@ -74,7 +76,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="https://www.figma.com/api/mcp/asset/0f0829bd-432e-45d6-bbe0-628aac067a51" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                            <Label Text="&#xf007;" FontFamily="FA_Solid" FontSize="18" TextColor="#757575" VerticalOptions="Center" Margin="0,0,8,0"/>
                             <Entry x:Name="ApellidosEntry" Grid.Column="1" Placeholder="Apellidos" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White"/>
                         </Grid>
                     </Frame>
@@ -94,7 +96,7 @@
                                 BackgroundColor="White"
                                 ItemsSource="{Binding DocumentTypes}"
                                 ItemDisplayBinding="{Binding Name}"/>
-                        <Image Grid.Column="1" Source="https://www.figma.com/api/mcp/asset/eeef46d0-7bf3-4d46-89e8-c02c7446e708" HeightRequest="16" WidthRequest="16" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="&#xf078;" FontFamily="FA_Solid" FontSize="14" TextColor="#757575" VerticalOptions="Center"/>
                     </Grid>
                 </Frame>
                 <!-- Número de documento y Teléfono -->
@@ -109,7 +111,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="https://www.figma.com/api/mcp/asset/8ff54c37-b100-4f2b-af9b-561ab83a9a18" HeightRequest="16" WidthRequest="16" VerticalOptions="Center"/>
+                            <Label Text="&#xf2c2;" FontFamily="FA_Solid" FontSize="16" TextColor="#757575" VerticalOptions="Center" Margin="0,0,8,0"/>
                             <Entry x:Name="DocumentoEntry" Grid.Column="1" Placeholder="Número de documento" FontSize="13" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White" Keyboard="Numeric"/>
                         </Grid>
                     </Frame>
@@ -119,7 +121,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="https://www.figma.com/api/mcp/asset/b184b380-4530-446a-b126-00aa309fd6ed" HeightRequest="16" WidthRequest="16" VerticalOptions="Center"/>
+                            <Label Text="&#xf095;" FontFamily="FA_Solid" FontSize="16" TextColor="#757575" VerticalOptions="Center" Margin="0,0,8,0"/>
                             <Entry x:Name="TelefonoEntry" Grid.Column="1" Placeholder="Teléfono" FontSize="16" TextColor="#424242" FontFamily="Roboto-Regular" BackgroundColor="White" Keyboard="Telephone" MaxLength="10"/>
                         </Grid>
                     </Frame>
@@ -148,10 +150,28 @@
                     Clicked="OnRegisterClicked"/>
             <!-- Soporte, Términos, Privacidad -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="20" Margin="0,20,0,0">
-                <Label Text="Soporte" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
-                <Label Text="Términos de Uso" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
-                <Label Text="Política de Privacidad" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular"/>
+                <Label Text="Soporte" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSupportTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Términos de Uso" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTermsTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Política de Privacidad" FontSize="12" TextColor="#9E9E9E" FontFamily="Roboto-Regular">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPrivacyTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
+    
+    <!-- Modales de Términos, Privacidad y Soporte -->
+    <local:SupportModalView x:Name="SupportModalView" />
+    <local:LegalModalView x:Name="LegalModalView" />
+    <local:PrivacyModalView x:Name="PrivacyModalView" />
+    </Grid>
 </ContentPage>

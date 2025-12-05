@@ -8,9 +8,10 @@ public class BoolToChevronConverter : IValueConverter
     {
         if (value is bool isExpanded)
         {
-            return isExpanded ? "\uf282" : "\uf285"; // chevron-down : chevron-right
+            // Font Awesome 7: chevron-down (\uf078) : chevron-right (\uf054)
+            return isExpanded ? "\uf078" : "\uf054";
         }
-        return "\uf285";
+        return "\uf054";
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
