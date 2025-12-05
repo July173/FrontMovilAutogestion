@@ -1,4 +1,6 @@
-﻿using AutogestionSena.MAUI;
+﻿using Android.App;
+using Android.Runtime;
+using AutogestionSena.MAUI;
 
 namespace AutogestionSena.MAUI;
 
