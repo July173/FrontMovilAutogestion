@@ -8,7 +8,7 @@ Proyecto MAUI que incluye vistas para autenticación, perfil y manejo de experie
 
 ---
 
-## 🆕 Actualización a .NET 9 (Junio 2025)
+## 🆕 Actualización a .NET 9 (diciembre 2025)
 
 ### ¿Por qué se actualizó de .NET 8 a .NET 9?
 
@@ -195,5 +195,5 @@ Si necesitas ayuda adicional, deja una issue en el repositorio o contacta al man
 
 ---
 
-*Documentación actualizada tras la migración a .NET 9 - Junio 2025*
+*Documentación actualizada tras la migración a .NET 9 - diciembre 2025*
 
