@@ -15,27 +15,27 @@ namespace AutogestionSena.MAUI.Api.Services
     {
         private readonly ApiService _apiService;
         
-        // Mapeo de módulos a iconos (Bootstrap Icons Unicode)
+        // Mapeo de módulos a iconos (Font Awesome 7 Unicode)
         private static readonly Dictionary<string, string> ModuleIconMap = new()
         {
-            ["inicio"] = "\uf425",           // bi-house-fill
-            ["home"] = "\uf425",
-            ["seguridad"] = "\uf59d",        // bi-shield-fill
-            ["security"] = "\uf59d",
-            ["administración"] = "\uf4cb",   // bi-person-check-fill
-            ["administracion"] = "\uf4cb",
-            ["administration"] = "\uf4cb",
-            ["user-check"] = "\uf4cb",
-            ["asignar seguimientos"] = "\uf4dd", // bi-person-workspace
-            ["asignar seguimiento"] = "\uf4dd",
-            ["seguimientos"] = "\uf4dd",
-            ["usuario"] = "\uf4da",          // bi-person-fill
-            ["user"] = "\uf4da",
-            ["reportes"] = "\uf2e6",         // bi-bar-chart-fill
-            ["chart"] = "\uf2e6",
-            ["configuración"] = "\uf3e5",    // bi-gear-fill
-            ["configuracion"] = "\uf3e5",
-            ["settings"] = "\uf3e5",
+            ["inicio"] = "\uf015",           // fa-house
+            ["home"] = "\uf015",
+            ["seguridad"] = "\uf132",        // fa-shield
+            ["security"] = "\uf132",
+            ["administración"] = "\uf4fc",   // fa-user-check
+            ["administracion"] = "\uf4fc",
+            ["administration"] = "\uf4fc",
+            ["user-check"] = "\uf4fc",
+            ["asignar seguimientos"] = "\uf500", // fa-user-group
+            ["asignar seguimiento"] = "\uf500",
+            ["seguimientos"] = "\uf500",
+            ["usuario"] = "\uf007",          // fa-user
+            ["user"] = "\uf007",
+            ["reportes"] = "\uf080",         // fa-chart-bar
+            ["chart"] = "\uf080",
+            ["configuración"] = "\uf013",    // fa-gear
+            ["configuracion"] = "\uf013",
+            ["settings"] = "\uf013",
         };
 
         public MenuService(ApiService apiService)
@@ -224,7 +224,7 @@ namespace AutogestionSena.MAUI.Api.Services
         public static string GetModuleIcon(string moduleName)
         {
             var key = moduleName?.ToLower() ?? "";
-            return ModuleIconMap.ContainsKey(key) ? ModuleIconMap[key] : "\uf425";
+            return ModuleIconMap.ContainsKey(key) ? ModuleIconMap[key] : "\uf015";
         }
     }
 }

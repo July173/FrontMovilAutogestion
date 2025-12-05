@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutogestionSena.MAUI.Views.LegalModalView">
+    <Grid x:Name="ModalContainer" BackgroundColor="#80000000" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Frame x:Name="ModalFrame" Padding="18" CornerRadius="10" BackgroundColor="White" HorizontalOptions="Center" VerticalOptions="Center" HasShadow="True" WidthRequest="760">
+            <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <!-- Icono de candado con Font Awesome -->
+                    <Frame WidthRequest="44" HeightRequest="44" CornerRadius="22" BackgroundColor="#43A047" Padding="8" HasShadow="False" VerticalOptions="Center">
+                        <Label Text="&#xf023;" 
+                               FontFamily="FA_Solid" 
+                               FontSize="20" 
+                               TextColor="White" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Frame>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" HorizontalOptions="CenterAndExpand">
+                        <Label x:Name="TitleLabel" Text="Documento Legal" FontSize="20" FontAttributes="Bold" TextColor="#000000" HorizontalOptions="Center" />
+                        <Label Text="Cómo el SENA protege y utiliza su información personal" FontSize="13" TextColor="#000000" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="2" Text="✕" BackgroundColor="Transparent" TextColor="#616161" FontSize="18" WidthRequest="40" HeightRequest="40" Clicked="OnCloseClicked" />
+                </Grid>
+                <BoxView HeightRequest="1" BackgroundColor="#eeeeee" />
+                <ScrollView x:Name="ContentScroll" HeightRequest="520">
+                    <VerticalStackLayout x:Name="ContentStack" Spacing="12" Padding="6" />
+                </ScrollView>
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <Button Text="Cerrar" BackgroundColor="Transparent" TextColor="#757575" Clicked="OnCloseClicked" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentView>
