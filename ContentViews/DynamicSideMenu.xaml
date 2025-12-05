@@ -65,7 +65,7 @@
  <!-- Icono del menú (Bootstrap Icons) -->
  <Label Grid.Column="0"
  Text="{Binding Icon}"
- FontFamily="BootstrapIcons"
+ FontFamily="FA_Solid"
  FontSize="20"
  TextColor="White"
  VerticalOptions="Center"
@@ -81,7 +81,7 @@
  <!-- Icono de expandir (si tiene submenús) -->
  <Label Grid.Column="2"
  Text="{Binding IsExpanded, Converter={StaticResource BoolToChevronConverter}}"
- FontFamily="BootstrapIcons"
+ FontFamily="FA_Solid"
  FontSize="16"
  TextColor="White"
  VerticalOptions="Center"
@@ -193,8 +193,8 @@
 
  <!-- Icono de menú (Bootstrap Icons) -->
  <Label Grid.Column="2"
- Text="&#xf229;"
- FontFamily="BootstrapIcons"
+ Text="&#xf00a;"
+ FontFamily="FA_Solid"
  FontSize="20"
  TextColor="White"
  VerticalOptions="Center"/>

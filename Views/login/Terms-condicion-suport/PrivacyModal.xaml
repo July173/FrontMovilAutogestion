@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutogestionSena.MAUI.Views.PrivacyModalView">
+
+    <!-- Use AbsoluteLayout so the overlay always covers the whole page and the modal is centered -->
+    <AbsoluteLayout x:Name="ModalContainer" BackgroundColor="#80000000" IsVisible="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ZIndex="100">
+
+        <Frame x:Name="ModalFrame" Padding="18" CornerRadius="10" BackgroundColor="White" HasShadow="True"
+               AbsoluteLayout.LayoutBounds="0.5,0.5,0.95,0.85"
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional,HeightProportional">
+
+            <Grid RowDefinitions="Auto,*,Auto">
+                <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Padding="6">
+                    <!-- Icono de candado con Font Awesome -->
+                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="20" BackgroundColor="#43A047" HasShadow="False" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Label Text="&#xf023;" 
+                               FontFamily="FA_Solid" 
+                               FontSize="18" 
+                               TextColor="White" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Frame>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" HorizontalOptions="CenterAndExpand">
+                        <Label x:Name="TitleLabel" Text="Política de privacidad" FontSize="24" FontAttributes="Bold" TextColor="#000000" HorizontalOptions="Center" />
+                        <Label x:Name="SubtitleLabel" Text="Cómo el SENA protege y utiliza su información personal" FontSize="12" TextColor="#000000" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="2" Text="✕" BackgroundColor="Transparent" TextColor="#616161" FontSize="18" WidthRequest="40" HeightRequest="40" Clicked="OnCloseClicked" />
+                </Grid>
+
+                <BoxView Grid.Row="0" HeightRequest="1" BackgroundColor="#e5e7eb" Margin="0,54,0,0" />
+
+                <!-- Make the ScrollView flexible (no fixed HeightRequest) so it sizes inside the responsive frame -->
+                <ScrollView x:Name="ContentScroll" Grid.Row="1" Padding="12" VerticalOptions="FillAndExpand">
+                    <VerticalStackLayout x:Name="ContentStack" Spacing="12" />
+                </ScrollView>
+
+                <HorizontalStackLayout Grid.Row="2" HorizontalOptions="End" Padding="8">
+                    <Button Text="Cerrar" BackgroundColor="Transparent" TextColor="#000000" Clicked="OnCloseClicked" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Frame>
+
+    </AbsoluteLayout>
+</ContentView>
