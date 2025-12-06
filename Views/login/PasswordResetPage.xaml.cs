@@ -150,5 +150,21 @@ namespace AutogestionSena.MAUI.Views
         {
             await Shell.Current.GoToAsync("///LoginPage");
         }
+
+        // Métodos para mostrar modales de términos, privacidad y soporte
+        private void OnSupportTapped(object sender, EventArgs e)
+        {
+            SupportModalView.Show();
+        }
+
+        private void OnTermsTapped(object sender, EventArgs e)
+        {
+            LegalModalView.Show("terms");
+        }
+
+        private void OnPrivacyTapped(object sender, EventArgs e)
+        {
+            PrivacyModalView.Show("privacy");
+        }
     }
 }
