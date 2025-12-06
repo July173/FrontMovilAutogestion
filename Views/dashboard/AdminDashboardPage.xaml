@@ -51,8 +51,10 @@
                                            HasShadow="False"
                                            WidthRequest="40"
                                            HeightRequest="40">
-                                        <Label Text="👨‍🎓" 
+                                        <Label Text="&#xf501;" 
+                                               FontFamily="FA_Solid"
                                                FontSize="20" 
+                                               TextColor="White"
                                                HorizontalOptions="Center" 
                                                VerticalOptions="Center"/>
                                     </Frame>
@@ -95,8 +97,10 @@
                                            HasShadow="False"
                                            WidthRequest="40"
                                            HeightRequest="40">
-                                        <Label Text="📋" 
+                                        <Label Text="&#xf46d;" 
+                                               FontFamily="FA_Solid"
                                                FontSize="20" 
+                                               TextColor="White"
                                                HorizontalOptions="Center" 
                                                VerticalOptions="Center"/>
                                     </Frame>
@@ -145,8 +149,10 @@
                                            HasShadow="False"
                                            WidthRequest="40"
                                            HeightRequest="40">
-                                        <Label Text="📊" 
+                                        <Label Text="&#xf46c;" 
+                                               FontFamily="FA_Solid"
                                                FontSize="20" 
+                                               TextColor="White"
                                                HorizontalOptions="Center" 
                                                VerticalOptions="Center"/>
                                     </Frame>
