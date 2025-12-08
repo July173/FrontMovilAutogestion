@@ -33,6 +33,8 @@
   <!-- Configuración para Android: Generar APK en lugar de AAB -->
   <PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
     <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <!-- Deshabilita la implementación rápida (fast deployment) para evitar errores de despliegue de archivos PDB durante el run -->
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
     <MauiAsset Include="Resources\Raw\routeMap.json" />

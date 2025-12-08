@@ -23,10 +23,13 @@
                     HeightRequest="40"
                     HorizontalOptions="Start"
                     Margin="0,0,0,10"/>
-            <!-- Logo -->
-            <Frame Padding="0" HasShadow="False" CornerRadius="60" HeightRequest="120" WidthRequest="120" BackgroundColor="Transparent" HorizontalOptions="Center">
-                <Image x:Name="LogoImage" Source="https://www.figma.com/api/mcp/asset/835afbaf-5f9f-40ba-a645-a69ea42f4d72" Aspect="AspectFill"/> 
-            </Frame>
+            <!-- Logo SENA -->
+            <Image x:Name="LogoImage"
+                   Source="../Resources/AppIcon/LogoSenaVerde.svg" 
+                   Aspect="AspectFill" 
+                   HeightRequest="100" 
+                   WidthRequest="100"
+                   HorizontalOptions="Center"/>
             <!-- Título -->
                  <Label x:Name="TitleLabel" Text="AutoGestión CIES"
                    FontFamily="Roboto-Bold"
