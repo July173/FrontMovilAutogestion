@@ -51,7 +51,6 @@
             <!-- Tabs -->
             <Frame HasShadow="False" Padding="12" BackgroundColor="#FFFFFF" CornerRadius="8">
                 <HorizontalStackLayout Spacing="8">
-                    <!-- Cada pestaña es un Frame que muestra sombra cuando está seleccionada -->
                     <Frame HasShadow="{Binding TabTodasHasShadow}" CornerRadius="8" Padding="0" BackgroundColor="Transparent" BorderColor="Transparent">
                         <Button x:Name="BtnTodas" Text="{Binding TodasTabText}" Clicked="OnTabTodasClicked" BackgroundColor="Transparent" TextColor="{Binding TabTodasTextColor}" Padding="12,6"/>
                     </Frame>
@@ -62,7 +61,7 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Summary + actions (text first, actions to the right) -->
+            <!-- Summary + actions -->
             <Grid ColumnDefinitions="*,Auto" Padding="0">
                 <Label Text="{Binding SummaryText}" VerticalOptions="Center" TextColor="#666" />
 
@@ -74,43 +73,113 @@
 
             <!-- Notifications list with pull-to-refresh -->
             <RefreshView x:Name="NotificationsRefresh" IsRefreshing="False" Refreshing="OnRefreshRequested">
-                <CollectionView ItemsSource="{Binding DisplayedNotifications}" SelectionMode="None" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Margin="0,8" Padding="12" CornerRadius="10" HasShadow="False" BorderColor="{Binding BorderColor, Source={x:Reference Name=ThisPageBindingHelper}}" BackgroundColor="White">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnNotificationTapped" />
-                                </Frame.GestureRecognizers>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackLayout>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" Grid.Column="0" LineBreakMode="TailTruncation"/>
-                                            <Label Text="{Binding TimestampText}" FontSize="12" TextColor="#A0A0A0" Grid.Column="1" HorizontalOptions="End"/>
-                                        </Grid>
-
-                                        <Label Text="{Binding Message}" FontSize="14" TextColor="#555" Margin="0,6,0,0" LineBreakMode="TailTruncation"/>
-                                    </StackLayout>
-
-                                    <Button Text="Eliminar" FontSize="12" TextColor="#D33" BackgroundColor="Transparent" Grid.Column="1" VerticalOptions="Start" Clicked="OnDeleteItemClicked" CommandParameter="{Binding Id}" IsEnabled="{Binding Source={x:Reference ThisPageBindingHelper}, Path=BindingContext.IsNotLoading}"/>
-                                </Grid>
+                <Grid>
+                    <!-- Mensaje cuando no hay notificaciones -->
+                    <Frame IsVisible="{Binding HasNoNotifications}"
+                           BackgroundColor="#F8F9FA"
+                           BorderColor="#E0E0E0"
+                           CornerRadius="12"
+                           Padding="32"
+                           HasShadow="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+                            <Frame BackgroundColor="#ECEFF1" 
+                                   CornerRadius="40" 
+                                   HeightRequest="80" 
+                                   WidthRequest="80" 
+                                   Padding="0" 
+                                   HasShadow="False"
+                                   HorizontalOptions="Center">
+                                <Label Text="&#xf0f3;" 
+                                       FontFamily="FA_Solid" 
+                                       FontSize="36" 
+                                       TextColor="#90A4AE" 
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center" />
                             </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+                            <Label Text="No tienes notificaciones" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold"
+                                   TextColor="#546E7A" 
+                                   HorizontalTextAlignment="Center" />
+                            <Label Text="Cuando recibas nuevas notificaciones aparecerán aquí." 
+                                   FontSize="14" 
+                                   TextColor="#78909C" 
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
 
-            <!-- hidden helper reference for bindings -->
-            <ContentView x:Name="ThisPageBindingHelper" IsVisible="False" />
+                    <!-- Lista de notificaciones -->
+                    <CollectionView ItemsSource="{Binding DisplayedNotifications}" 
+                                    SelectionMode="None" 
+                                    BackgroundColor="Transparent" 
+                                    VerticalOptions="FillAndExpand"
+                                    IsVisible="{Binding HasNotifications}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- Fondo y borde según estado de lectura -->
+                                <Frame Margin="0,8" 
+                                       Padding="12" 
+                                       CornerRadius="10" 
+                                       HasShadow="False" 
+                                       BorderColor="{Binding CardBorderColor}" 
+                                       BackgroundColor="{Binding CardBackgroundColor}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnNotificationTapped" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                        
+                                        <!-- Indicador de no leída (punto azul) -->
+                                        <Frame Grid.Column="0"
+                                               WidthRequest="12"
+                                               HeightRequest="12"
+                                               CornerRadius="6"
+                                               Padding="0"
+                                               HasShadow="False"
+                                               BackgroundColor="#1976D2"
+                                               VerticalOptions="Center"
+                                               IsVisible="{Binding IsUnread}"/>
+                                        
+                                        <!-- Contenido de la notificación -->
+                                        <StackLayout Grid.Column="1">
+                                            <Grid ColumnDefinitions="*,Auto">
+                                                <Label Text="{Binding Title}" 
+                                                       FontAttributes="{Binding TitleFontAttributes}" 
+                                                       FontSize="16" 
+                                                       Grid.Column="0" 
+                                                       LineBreakMode="TailTruncation"
+                                                       TextColor="{Binding TitleTextColor}"/>
+                                                <Label Text="{Binding TimestampText}" 
+                                                       FontSize="12" 
+                                                       TextColor="#A0A0A0" 
+                                                       Grid.Column="1" 
+                                                       HorizontalOptions="End"/>
+                                            </Grid>
+
+                                            <Label Text="{Binding Message}" 
+                                                   FontSize="14" 
+                                                   TextColor="{Binding MessageTextColor}" 
+                                                   Margin="0,6,0,0" 
+                                                   LineBreakMode="TailTruncation"/>
+                                        </StackLayout>
+
+                                        <!-- Botón eliminar -->
+                                        <Button Text="Eliminar" 
+                                                FontSize="12" 
+                                                TextColor="#D33" 
+                                                BackgroundColor="Transparent" 
+                                                Grid.Column="2" 
+                                                VerticalOptions="Start" 
+                                                Clicked="OnDeleteItemClicked" 
+                                                CommandParameter="{Binding Id}"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </RefreshView>
         </StackLayout>
 
         <!-- Footer -->

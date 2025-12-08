@@ -22,24 +22,45 @@ namespace AutogestionSena.MAUI.Api.Services
         }
 
         /// <summary>
-        /// Obtiene las notificaciones seg�n rol y id de usuario
+        /// Obtiene las notificaciones según rol y id de usuario
         /// roleQueryName debe ser uno de: apprentice_id, instructor_id, coordinator_id, sofia_operator_id, admin_id
+        /// Retorna lista vacía si no hay notificaciones (404) o si hay error
         /// </summary>
-        public async Task<List<NotificationDto>?> GetNotificationsAsync(string roleQueryName, int userId)
+        public async Task<List<NotificationDto>> GetNotificationsAsync(string roleQueryName, int userId)
         {
             try
             {
                 var endpoint = $"{Endpoints.Notification.GetNotifications}?{roleQueryName}={userId}";
-                return await _apiService.GetAsync<List<NotificationDto>>(endpoint);
+                System.Diagnostics.Debug.WriteLine($"[NotificationService] Llamando endpoint: {endpoint}");
+                
+                var result = await _apiService.GetAsync<List<NotificationDto>>(endpoint);
+                
+                if (result == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("[NotificationService] Resultado null, retornando lista vacía");
+                    return new List<NotificationDto>();
+                }
+                
+                System.Diagnostics.Debug.WriteLine($"[NotificationService] Obtenidas {result.Count} notificaciones");
+                return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                // Si el error es 404 "No hay notificaciones", retornar lista vacía
+                if (ex.Message.Contains("404") || ex.Message.Contains("No hay notificaciones") || ex.Message.Contains("Not Found"))
+                {
+                    System.Diagnostics.Debug.WriteLine("[NotificationService] 404 - No hay notificaciones para este usuario");
+                    return new List<NotificationDto>();
+                }
+                
+                System.Diagnostics.Debug.WriteLine($"[NotificationService] Error: {ex.Message}");
+                // Para otros errores, retornar lista vacía también para no bloquear la UI
+                return new List<NotificationDto>();
             }
         }
 
         /// <summary>
-        /// Elimina (desactiva) una notificaci�n por id
+        /// Elimina (desactiva) una notificación por id
         /// </summary>
         public async Task<bool> DeleteNotificationByIdAsync(int notificationId)
         {
@@ -49,14 +70,15 @@ namespace AutogestionSena.MAUI.Api.Services
                 var resp = await _apiService.DeleteAsync(endpoint);
                 return resp.IsSuccessStatusCode;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"[NotificationService] Error al eliminar: {ex.Message}");
                 throw;
             }
         }
 
         /// <summary>
-        /// Desactiva (elimina) todas las notificaciones de un usuario seg�n rol
+        /// Desactiva (elimina) todas las notificaciones de un usuario según rol
         /// roleQueryName debe ser admin_id, apprentice_id, etc.
         /// </summary>
         public async Task<bool> DeleteNotificationsByUserAsync(string roleQueryName, int userId)
@@ -67,14 +89,15 @@ namespace AutogestionSena.MAUI.Api.Services
                 var resp = await _apiService.DeleteAsync(endpoint);
                 return resp.IsSuccessStatusCode;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"[NotificationService] Error al eliminar todas: {ex.Message}");
                 throw;
             }
         }
 
         /// <summary>
-        /// Marca como le�da una notificaci�n solicitando GET al recurso /general/notifications/{id}/
+        /// Marca como leída una notificación solicitando GET al recurso /general/notifications/{id}/
         /// </summary>
         public async Task<NotificationDto?> MarkAsReadAsync(int notificationId)
         {
@@ -83,9 +106,10 @@ namespace AutogestionSena.MAUI.Api.Services
                 var endpoint = Endpoints.Notification.GetById(notificationId);
                 return await _apiService.GetAsync<NotificationDto>(endpoint);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                System.Diagnostics.Debug.WriteLine($"[NotificationService] Error al marcar como leída: {ex.Message}");
+                return null;
             }
         }
     }

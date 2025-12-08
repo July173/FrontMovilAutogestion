@@ -98,10 +98,12 @@ namespace AutogestionSena.MAUI.Views.notificaciones
                 int role = Preferences.Get("UserRole", 0);
                 int userId = Preferences.Get("UserId", 0);
 
-if (role == 0 || userId == 0)
+                System.Diagnostics.Debug.WriteLine($"[Notifications] Cargando notificaciones - Role: {role}, UserId: {userId}");
+
+                if (role == 0 || userId == 0)
                 {
-                    // Cargar ejemplo si no hay datos
-                    AddSampleData();
+                    System.Diagnostics.Debug.WriteLine("[Notifications] No hay rol o userId configurado");
+                    // No cargar datos de ejemplo, mostrar lista vacía
                     UpdateDisplayed();
                     UpdateTabVisuals();
                     return;
@@ -111,14 +113,26 @@ if (role == 0 || userId == 0)
                 var roleQuery = RoleToQueryParam(role);
                 if (string.IsNullOrEmpty(roleQuery))
                 {
-                    AddSampleData();
+                    System.Diagnostics.Debug.WriteLine("[Notifications] Rol no mapeado correctamente");
                     UpdateDisplayed();
                     UpdateTabVisuals();
                     return;
                 }
 
+                System.Diagnostics.Debug.WriteLine($"[Notifications] Llamando API con roleQuery: {roleQuery}, userId: {userId}");
+
                 var dtos = await _notificationService.GetNotificationsAsync(roleQuery, userId);
-                if (dtos == null) dtos = new System.Collections.Generic.List<NotificationDto>();
+                
+                // Si no hay notificaciones (null o lista vacía), mostrar lista vacía
+                if (dtos == null || dtos.Count == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("[Notifications] No hay notificaciones del servidor");
+                    UpdateDisplayed();
+                    UpdateTabVisuals();
+                    return;
+                }
+
+                System.Diagnostics.Debug.WriteLine($"[Notifications] Recibidas {dtos.Count} notificaciones");
 
                 foreach (var d in dtos)
                 {
@@ -128,8 +142,8 @@ if (role == 0 || userId == 0)
                     Notifications.Add(new NotificationItem
                     {
                         Id = d.Id.ToString(),
-                        Title = d.Title,
-                        Message = d.Message,
+                        Title = d.Title ?? "Sin título",
+                        Message = d.Message ?? "",
                         Timestamp = d.CreatedAt,
                         IsRead = d.IsRead,
                         Active = d.Active
@@ -139,9 +153,10 @@ if (role == 0 || userId == 0)
                 UpdateDisplayed();
                 UpdateTabVisuals();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                AddSampleData();
+                System.Diagnostics.Debug.WriteLine($"[Notifications] Error al cargar: {ex.Message}");
+                // En caso de error, NO cargar datos de ejemplo, mostrar lista vacía
                 UpdateDisplayed();
                 UpdateTabVisuals();
             }
@@ -201,13 +216,17 @@ if (role == 0 || userId == 0)
         public string TodasTabText => $"Todas ({Notifications.Count})";
         public string SinLeerTabText => $"Sin leer ({Notifications.Count(n => !n.IsRead)})";
 
-        // Propiedades para cambiar apariencia de pesta�as (simple)
+        // Propiedades para controlar visibilidad de lista/mensaje vacío
+        public bool HasNotifications => DisplayedNotifications.Count > 0;
+        public bool HasNoNotifications => DisplayedNotifications.Count == 0;
+
+        // Propiedades para cambiar apariencia de pestañas (simple)
         public string TabTodasBackground => _selectedTab == 0 ? "#E3F2FD" : "#FFFFFF";
         public string TabSinLeerBackground => _selectedTab == 1 ? "#E3F2FD" : "#FFFFFF";
         public string TabTodasTextColor => _selectedTab == 0 ? "#1976D2" : "#333";
         public string TabSinLeerTextColor => _selectedTab == 1 ? "#1976D2" : "#333";
 
-        // Nuevas propiedades para controlar sombra en pesta�as
+        // Nuevas propiedades para controlar sombra en pestañas
         public bool TabTodasHasShadow => _selectedTab == 0;
         public bool TabSinLeerHasShadow => _selectedTab == 1;
 
@@ -227,6 +246,8 @@ if (role == 0 || userId == 0)
             OnPropertyChanged(nameof(SummaryText));
             OnPropertyChanged(nameof(TodasTabText));
             OnPropertyChanged(nameof(SinLeerTabText));
+            OnPropertyChanged(nameof(HasNotifications));
+            OnPropertyChanged(nameof(HasNoNotifications));
         }
 
         private void UpdateTabVisuals()
@@ -578,6 +599,13 @@ if (role == 0 || userId == 0)
                 {
                     _isRead = value;
                     OnPropertyChanged(nameof(IsRead));
+                    // Notificar cambios en propiedades visuales
+                    OnPropertyChanged(nameof(IsUnread));
+                    OnPropertyChanged(nameof(CardBackgroundColor));
+                    OnPropertyChanged(nameof(CardBorderColor));
+                    OnPropertyChanged(nameof(TitleTextColor));
+                    OnPropertyChanged(nameof(MessageTextColor));
+                    OnPropertyChanged(nameof(TitleFontAttributes));
                 }
             }
         }
@@ -596,6 +624,29 @@ if (role == 0 || userId == 0)
         }
 
         public string TimestampText => Timestamp.ToString("dd/MM/yyyy, HH:mm:ss");
+
+        // Propiedades calculadas para el estado visual
+        public bool IsUnread => !IsRead;
+
+        public Color CardBackgroundColor => IsRead 
+            ? Color.FromArgb("#F8F9FA")   // Leída: gris muy claro
+            : Color.FromArgb("#E3F2FD");  // No leída: azul claro
+
+        public Color CardBorderColor => IsRead 
+            ? Color.FromArgb("#E0E0E0")   // Leída: borde gris
+            : Color.FromArgb("#1976D2");  // No leída: borde azul
+
+        public Color TitleTextColor => IsRead 
+            ? Color.FromArgb("#666666")   // Leída: gris
+            : Color.FromArgb("#333333");  // No leída: negro
+
+        public Color MessageTextColor => IsRead 
+            ? Color.FromArgb("#888888")   // Leída: gris claro
+            : Color.FromArgb("#555555");  // No leída: gris oscuro
+
+        public FontAttributes TitleFontAttributes => IsRead 
+            ? FontAttributes.None         // Leída: normal
+            : FontAttributes.Bold;        // No leída: negrita
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
