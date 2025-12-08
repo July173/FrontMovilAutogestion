@@ -16,7 +16,7 @@ namespace AutogestionSena.MAUI.Api
         // private const string BASE_PORT = "8000";
         
         // PRODUCCIÓN: Servidor desplegado
-        private const string BASE_IP = "167.114.98.199";
+        private const string BASE_IP = "192.168.1.8";
         private const string BASE_PORT = "8000";  // Puerto del backend Django
         // ============================================
         
@@ -29,7 +29,7 @@ namespace AutogestionSena.MAUI.Api
         {
 #if ANDROID
             // Para Android usamos la IP directa
-            return $"http://{BASE_IP}/api/";
+            return $"http://{BASE_IP}:{BASE_PORT}/api/";
 #elif IOS
             // Para iOS usamos la IP de la red local
             return $"http://{BASE_IP}/api/";
@@ -115,6 +115,7 @@ namespace AutogestionSena.MAUI.Api
             public static string FilterInstructores => "general/instructors/filter/";
     
             public static string GetInstructor(int instructorId) => $"general/instructors/{instructorId}/";
+            public static string GetDashboard(int instructorId) => $"general/instructors/{instructorId}/dashboard/";
         }
 
         public static class Regional

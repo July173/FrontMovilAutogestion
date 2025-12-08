@@ -9,7 +9,7 @@
         <ScrollView>
         <VerticalStackLayout Padding="30,40" Spacing="30" HorizontalOptions="Center" MaximumWidthRequest="600">
             <!-- Logo -->
-            <Frame Padding="0" HasShadow="False" CornerRadius="40" HeightRequest="80" WidthRequest="80" BackgroundColor="Transparent" HorizontalOptions="Center">
+            <Frame BackgroundColor="Transparent" HorizontalOptions="Center" BorderColor="White">
                 <Image Source="../Resources/AppIcon/LogoSenaVerde.svg" Aspect="AspectFill" HeightRequest="80" WidthRequest="80"/>
             </Frame>
             <!-- Título -->

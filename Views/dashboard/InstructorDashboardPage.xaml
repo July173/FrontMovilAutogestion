@@ -21,205 +21,161 @@
  />
  </Frame>
 
- <!-- Tarjetas resumen -->
- <HorizontalStackLayout Spacing="24" HorizontalOptions="Center" Margin="0,0,0,0">
- <!-- Tarjeta1 -->
+ <!-- Indicador de carga -->
+ <ActivityIndicator x:Name="LoadingIndicator" 
+      IsRunning="False" 
+      IsVisible="False" 
+      Color="#219653"
+      HorizontalOptions="Center" />
+
+ <!-- Tarjetas resumen con scroll horizontal -->
+ <ScrollView Orientation="Horizontal" 
+       HorizontalScrollBarVisibility="Default"
+       HorizontalOptions="FillAndExpand">
+ <HorizontalStackLayout x:Name="StatsContainer" Spacing="24" Padding="0,0,24,0">
+ <!-- Tarjeta1 - Visitas Programadas -->
  <Frame BackgroundColor="White"
  BorderColor="#BDBDBD"
  CornerRadius="14"
  Padding="18"
- WidthRequest="240"
+ WidthRequest="260"
  HasShadow="False">
  <VerticalStackLayout Spacing="8">
- <HorizontalStackLayout>
- <Label Text="Visitas programadas" FontSize="15" TextColor="#222" />
- <Frame BackgroundColor="#A5EEC5" CornerRadius="16" HeightRequest="32" WidthRequest="32" Padding="0" HasShadow="False" HorizontalOptions="End">
+ <Grid ColumnDefinitions="*, Auto" ColumnSpacing="12">
+ <Label Text="Visitas programadas" 
+    FontSize="15" 
+    TextColor="#222" 
+    VerticalOptions="Center"
+    Grid.Column="0" />
+ <Frame BackgroundColor="#A5EEC5" 
+   CornerRadius="16" 
+   HeightRequest="32" 
+   WidthRequest="32" 
+   Padding="0" 
+   HasShadow="False"
+   Grid.Column="1">
  <Label Text="&#xf274;" FontFamily="FA_Solid" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
  </Frame>
- </HorizontalStackLayout>
- <Label Text="2" FontSize="22" FontAttributes="Bold" TextColor="#222" />
+ </Grid>
+ <Label x:Name="VisitasProgramadasLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#222" />
  <Label Text="Para esta semana" FontSize="13" TextColor="#444" />
  </VerticalStackLayout>
  </Frame>
- <!-- Tarjeta2 -->
+ <!-- Tarjeta2 - Aprendices Asignados -->
  <Frame BackgroundColor="White"
  BorderColor="#BDBDBD"
  CornerRadius="14"
  Padding="18"
- WidthRequest="240"
+ WidthRequest="260"
  HasShadow="False">
  <VerticalStackLayout Spacing="8">
- <HorizontalStackLayout>
- <Label Text="Aprendices Asignados" FontSize="15" TextColor="#222" />
- <Frame BackgroundColor="#A5EEC5" CornerRadius="16" HeightRequest="32" WidthRequest="32" Padding="0" HasShadow="False" HorizontalOptions="End">
+ <Grid ColumnDefinitions="*, Auto" ColumnSpacing="12">
+ <Label Text="Aprendices Asignados" 
+    FontSize="15" 
+    TextColor="#222" 
+    VerticalOptions="Center"
+    Grid.Column="0" />
+ <Frame BackgroundColor="#A5EEC5" 
+   CornerRadius="16" 
+   HeightRequest="32" 
+   WidthRequest="32" 
+   Padding="0" 
+   HasShadow="False"
+   Grid.Column="1">
  <Label Text="&#xf501;" FontFamily="FA_Solid" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
  </Frame>
- </HorizontalStackLayout>
- <Label Text="2" FontSize="22" FontAttributes="Bold" TextColor="#222" />
- <Label Text="Aprendices tienes asignados para ser evaluados" FontSize="13" TextColor="#444" />
+ </Grid>
+ <Label x:Name="AprendicesAsignadosLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#222" />
+ <Label Text="Aprendices asignados para evaluar" FontSize="13" TextColor="#444" />
  </VerticalStackLayout>
  </Frame>
- <!-- Tarjeta3 -->
+ <!-- Tarjeta3 - Aprendices Evaluados -->
  <Frame BackgroundColor="White"
  BorderColor="#BDBDBD"
  CornerRadius="14"
  Padding="18"
- WidthRequest="240"
+ WidthRequest="260"
  HasShadow="False">
  <VerticalStackLayout Spacing="8">
- <HorizontalStackLayout>
- <Label Text="Aprendices Evaluados" FontSize="15" TextColor="#222" />
- <Frame BackgroundColor="#A5EEC5" CornerRadius="16" HeightRequest="32" WidthRequest="32" Padding="0" HasShadow="False" HorizontalOptions="End">
+ <Grid ColumnDefinitions="*, Auto" ColumnSpacing="12">
+ <Label Text="Aprendices Evaluados" 
+    FontSize="15" 
+    TextColor="#222" 
+    VerticalOptions="Center"
+    Grid.Column="0" />
+ <Frame BackgroundColor="#A5EEC5" 
+   CornerRadius="16" 
+   HeightRequest="32" 
+   WidthRequest="32" 
+   Padding="0" 
+   HasShadow="False"
+   Grid.Column="1">
  <Label Text="&#xf4fc;" FontFamily="FA_Solid" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#219653" />
  </Frame>
- </HorizontalStackLayout>
- <Label Text="2" FontSize="22" FontAttributes="Bold" TextColor="#222" />
+ </Grid>
+ <Label x:Name="AprendicesEvaluadosLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#222" />
  <Label Text="Aprendices evaluados" FontSize="13" TextColor="#444" />
  </VerticalStackLayout>
  </Frame>
  </HorizontalStackLayout>
+ </ScrollView>
 
  <!-- Título principal -->
- <Label Text="Aprendices Asignados"
+ <Label Text="Próximas Visitas"
  FontSize="24"
  FontAttributes="Bold"
  TextColor="#222"
  Margin="0,0,0,10" />
 
- <!-- Tarjetas de aprendices asignados -->
- <HorizontalStackLayout Spacing="32" HorizontalOptions="Center">
- <!-- Tarjeta1 -->
- <Frame BackgroundColor="White"
- CornerRadius="16"
- Padding="24"
- HasShadow="True"
- WidthRequest="420">
- <VerticalStackLayout Spacing="18">
- <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
- <Frame BackgroundColor="#C8F7DC"
- CornerRadius="20"
- HeightRequest="40"
- WidthRequest="40"
- Padding="0"
- HasShadow="False"
- VerticalOptions="Center">
- <Label Text="&#xf274;" FontFamily="FA_Solid" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#2E7D32" />
+ <!-- Mensaje cuando no hay visitas -->
+ <Frame x:Name="NoVisitasFrame" 
+  BackgroundColor="White"
+  BorderColor="#E0E0E0"
+  CornerRadius="16"
+  Padding="32"
+  HasShadow="True"
+  IsVisible="False"
+  HorizontalOptions="FillAndExpand"
+  Margin="0,0,0,24">
+ <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+ <Frame BackgroundColor="#F5F5F5" 
+   CornerRadius="40" 
+   HeightRequest="80" 
+   WidthRequest="80" 
+   Padding="0" 
+   HasShadow="False"
+   HorizontalOptions="Center">
+ <Label Text="&#xf274;" 
+    FontFamily="FA_Solid" 
+    FontSize="36" 
+    TextColor="#BDBDBD" 
+    HorizontalOptions="Center" 
+    VerticalOptions="Center" />
  </Frame>
- <Label Text="Visita programada"
- FontSize="20"
- FontAttributes="Bold"
- TextColor="#222"
- VerticalOptions="Center"
- HorizontalOptions="StartAndExpand" />
- </HorizontalStackLayout>
- <Label Text="Tienes una visita programada"
- FontSize="15"
- TextColor="#222"
- Margin="0,0,0,2" />
- <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#xf007;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
- <Label Text="Carlos ruiz :11292221893"
- FontSize="15"
- TextColor="#222"
- VerticalOptions="Center" />
- </HorizontalStackLayout>
- <Label Text="Programa de formación:"
- FontSize="15"
- TextColor="#222"
- Margin="0,8,0,0" />
- <Label Text="desarrollo de videojuegos"
- FontSize="15"
- TextColor="#222"
- FontAttributes="Bold"
- Margin="0,0,0,4" />
- <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#xf017;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
- <Label Text="Mañana"
- FontSize="15"
- TextColor="#222"
- VerticalOptions="Center" />
- </HorizontalStackLayout>
- <Frame BackgroundColor="White"
- BorderColor="#C8F7DC"
- CornerRadius="8"
- Padding="0"
- Margin="0,16,0,0"
- HasShadow="False">
- <Label Text="Ver detalles"
- FontSize="16"
- TextColor="#2E7D32"
- HorizontalTextAlignment="Center"
- Padding="0,12" />
- </Frame>
+ <Label Text="No hay visitas programadas" 
+    FontSize="20" 
+    FontAttributes="Bold"
+    TextColor="#444" 
+    HorizontalTextAlignment="Center" />
+ <Label Text="Por el momento no tienes visitas pendientes.&#x0a;Cuando tengas nuevas visitas asignadas aparecerán aquí." 
+    FontSize="14" 
+    TextColor="#888" 
+    HorizontalTextAlignment="Center"
+    LineBreakMode="WordWrap" />
  </VerticalStackLayout>
  </Frame>
 
- <!-- Tarjeta2 (ejemplo duplicado) -->
- <Frame BackgroundColor="White"
- CornerRadius="16"
- Padding="24"
- HasShadow="True"
- WidthRequest="420">
- <VerticalStackLayout Spacing="18">
- <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
- <Frame BackgroundColor="#C8F7DC"
- CornerRadius="20"
- HeightRequest="40"
- WidthRequest="40"
- Padding="0"
- HasShadow="False"
- VerticalOptions="Center">
- <Label Text="&#xf274;" FontFamily="FA_Solid" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#2E7D32" />
- </Frame>
- <Label Text="Visita programada"
- FontSize="20"
- FontAttributes="Bold"
- TextColor="#222"
- VerticalOptions="Center"
- HorizontalOptions="StartAndExpand" />
+ <!-- Contenedor de tarjetas de visitas con scroll horizontal -->
+ <ScrollView x:Name="VisitasScrollView"
+       Orientation="Horizontal" 
+       HorizontalScrollBarVisibility="Default"
+       HorizontalOptions="FillAndExpand">
+ <HorizontalStackLayout x:Name="VisitasContainer" 
+         Spacing="24" 
+         Padding="0,0,24,16">
+ <!-- Las tarjetas de visitas se generan dinámicamente -->
  </HorizontalStackLayout>
- <Label Text="Tienes una visita programada"
- FontSize="15"
- TextColor="#222"
- Margin="0,0,0,2" />
- <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#xf007;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
- <Label Text="Carlos ruiz :11292221893"
- FontSize="15"
- TextColor="#222"
- VerticalOptions="Center" />
- </HorizontalStackLayout>
- <Label Text="Programa de formación:"
- FontSize="15"
- TextColor="#222"
- Margin="0,8,0,0" />
- <Label Text="desarrollo de videojuegos"
- FontSize="15"
- TextColor="#222"
- FontAttributes="Bold"
- Margin="0,0,0,4" />
- <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
- <Label Text="&#xf017;" FontFamily="FA_Solid" FontSize="14" TextColor="#2E7D32" VerticalOptions="Center" />
- <Label Text="Mañana"
- FontSize="15"
- TextColor="#222"
- VerticalOptions="Center" />
- </HorizontalStackLayout>
- <Frame BackgroundColor="White"
- BorderColor="#C8F7DC"
- CornerRadius="8"
- Padding="0"
- Margin="0,16,0,0"
- HasShadow="False">
- <Label Text="Ver detalles"
- FontSize="16"
- TextColor="#2E7D32"
- HorizontalTextAlignment="Center"
- Padding="0,12" />
- </Frame>
- </VerticalStackLayout>
- </Frame>
- </HorizontalStackLayout>
+ </ScrollView>
  </VerticalStackLayout>
  </ScrollView>
 </ContentPage>
