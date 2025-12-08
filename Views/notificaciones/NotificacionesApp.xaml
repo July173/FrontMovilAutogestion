@@ -2,7 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:contentviews="clr-namespace:AutogestionSenaMaui.ContentViews"
              x:Class="AutogestionSena.MAUI.Views.notificaciones.NotificacionesApp"
-             >
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <Style x:Key="PillButton" TargetType="Button">
