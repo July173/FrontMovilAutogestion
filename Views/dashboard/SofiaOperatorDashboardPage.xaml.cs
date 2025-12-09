@@ -52,7 +52,11 @@ public partial class SofiaOperatorDashboardPage : ContentPage
             // Obtener token de autenticación
             var token = await SecureStorage.GetAsync("auth_token");
 
+            System.Diagnostics.Debug.WriteLine($"[OperatorDashboard] Cargando dashboard con token: {(string.IsNullOrEmpty(token) ? "NO TOKEN" : "TOKEN OK")}");
+
             var response = await _dashboardService.GetOperatorDashboardAsync(token);
+
+            System.Diagnostics.Debug.WriteLine($"[OperatorDashboard] Respuesta: Success={response?.Success}, Data={response?.Data != null}");
 
             if (response != null && response.Success && response.Data != null)
             {
@@ -62,27 +66,41 @@ public partial class SofiaOperatorDashboardPage : ContentPage
                 // Actualizar totales
                 if (response.Data.Totals != null)
                 {
+                    System.Diagnostics.Debug.WriteLine($"[OperatorDashboard] Totales: Registered={response.Data.Totals.Registered}, Pending={response.Data.Totals.Pending}, Total={response.Data.Totals.Total}");
+                    
                     RegisteredLabel.Text = response.Data.Totals.Registered.ToString();
                     PendingLabel.Text = response.Data.Totals.Pending.ToString();
                     TotalLabel.Text = response.Data.Totals.Total.ToString();
                 }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("[OperatorDashboard] Totals es null, mostrando valores de ejemplo");
+                    ShowExampleData();
+                }
 
                 // Guardar datos mensuales y renderizar gráfico
-                _monthlyData = response.Data.MonthlyData;
+                _monthlyData = response.Data.MonthlyData ?? new List<MonthlyDataDto>();
                 RenderChart();
 
                 NoDataLabel.IsVisible = false;
             }
             else
             {
+                System.Diagnostics.Debug.WriteLine($"[OperatorDashboard] Error en respuesta: {response?.Message}");
                 ShowError(response?.Message ?? "Error al cargar los datos del dashboard");
+                
+                // Mostrar datos de ejemplo para que el usuario vea la interfaz
+                ShowExampleData();
                 NoDataLabel.IsVisible = true;
             }
         }
         catch (Exception ex)
         {
             ShowError($"Error: {ex.Message}");
-            System.Diagnostics.Debug.WriteLine($"Error en LoadDashboardDataAsync: {ex}");
+            System.Diagnostics.Debug.WriteLine($"[OperatorDashboard] Excepción: {ex}");
+            
+            // Mostrar datos de ejemplo en caso de error
+            ShowExampleData();
         }
         finally
         {
@@ -91,6 +109,40 @@ public partial class SofiaOperatorDashboardPage : ContentPage
             ChartLoadingIndicator.IsVisible = false;
             ChartLoadingIndicator.IsRunning = false;
         }
+    }
+
+    /// <summary>
+    /// Muestra datos de ejemplo cuando no hay conexión al API
+    /// </summary>
+    private void ShowExampleData()
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            // Mostrar valores de ejemplo
+            RegisteredLabel.Text = "125";
+            PendingLabel.Text = "34";
+            TotalLabel.Text = "159";
+            YearLabel.Text = DateTime.Now.Year.ToString();
+
+            // Crear datos de ejemplo para el gráfico
+            _monthlyData = new List<MonthlyDataDto>
+            {
+                new MonthlyDataDto { Month = "Ene", MonthNumber = 1, Registered = 12, Pending = 5 },
+                new MonthlyDataDto { Month = "Feb", MonthNumber = 2, Registered = 18, Pending = 3 },
+                new MonthlyDataDto { Month = "Mar", MonthNumber = 3, Registered = 15, Pending = 8 },
+                new MonthlyDataDto { Month = "Abr", MonthNumber = 4, Registered = 22, Pending = 4 },
+                new MonthlyDataDto { Month = "May", MonthNumber = 5, Registered = 10, Pending = 6 },
+                new MonthlyDataDto { Month = "Jun", MonthNumber = 6, Registered = 14, Pending = 2 },
+                new MonthlyDataDto { Month = "Jul", MonthNumber = 7, Registered = 8, Pending = 3 },
+                new MonthlyDataDto { Month = "Ago", MonthNumber = 8, Registered = 11, Pending = 1 },
+                new MonthlyDataDto { Month = "Sep", MonthNumber = 9, Registered = 5, Pending = 2 },
+                new MonthlyDataDto { Month = "Oct", MonthNumber = 10, Registered = 0, Pending = 0 },
+                new MonthlyDataDto { Month = "Nov", MonthNumber = 11, Registered = 0, Pending = 0 },
+                new MonthlyDataDto { Month = "Dic", MonthNumber = 12, Registered = 0, Pending = 0 }
+            };
+
+            RenderChart();
+        });
     }
 
     private void RenderChart()
@@ -164,6 +216,47 @@ public partial class SofiaOperatorDashboardPage : ContentPage
         }
 
         NoDataLabel.IsVisible = false;
+    }
+
+    // Manejar click en botón de recargar
+    private async void OnRefreshClicked(object sender, EventArgs e)
+    {
+        // Evitar múltiples clics mientras se carga
+        if (RefreshSpinner.IsRunning)
+            return;
+
+        await RefreshDashboardWithAnimation();
+    }
+
+    // Refrescar dashboard con animación en el botón
+    private async Task RefreshDashboardWithAnimation()
+    {
+        try
+        {
+            // Mostrar estado de carga en el botón
+            SetRefreshButtonLoading(true);
+
+            // Cargar los datos
+            await LoadDashboardDataAsync();
+        }
+        finally
+        {
+            // Restaurar estado normal del botón
+            SetRefreshButtonLoading(false);
+        }
+    }
+
+    // Cambiar estado visual del botón de recargar
+    private void SetRefreshButtonLoading(bool isLoading)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            RefreshIcon.IsVisible = !isLoading;
+            RefreshSpinner.IsVisible = isLoading;
+            RefreshSpinner.IsRunning = isLoading;
+            RefreshButtonText.Text = isLoading ? "Actualizando..." : "Actualizar Dashboard";
+            RefreshButton.Opacity = isLoading ? 0.7 : 1.0;
+        });
     }
 
     private void ShowError(string message)

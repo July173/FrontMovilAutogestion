@@ -34,6 +34,43 @@
                             </VerticalStackLayout>
                         </Border>
 
+                        <!-- Botón de recargar separado -->
+                        <Border x:Name="RefreshButton"
+                                BackgroundColor="#43A047"
+                                StrokeShape="RoundRectangle 12"
+                                Stroke="Transparent"
+                                HeightRequest="48"
+                                Padding="20,0"
+                                HorizontalOptions="Center">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnRefreshClicked"/>
+                            </Border.GestureRecognizers>
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Center">
+                                <!-- Ícono de refresh (visible cuando no está cargando) -->
+                                <Label x:Name="RefreshIcon"
+                                       Text="&#xf021;"
+                                       FontFamily="FA_Solid"
+                                       FontSize="18"
+                                       TextColor="White"
+                                       VerticalOptions="Center"/>
+                                <!-- ActivityIndicator (visible cuando está cargando) -->
+                                <ActivityIndicator x:Name="RefreshSpinner"
+                                                  IsRunning="False"
+                                                  IsVisible="False"
+                                                  Color="White"
+                                                  HeightRequest="20"
+                                                  WidthRequest="20"
+                                                  VerticalOptions="Center"/>
+                                <Label x:Name="RefreshButtonText"
+                                       Text="Actualizar Dashboard"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="White"
+                                       VerticalOptions="Center"
+                                       FontFamily="Roboto-Bold"/>
+                            </HorizontalStackLayout>
+                        </Border>
+
                         <!-- Tarjetas de estadísticas -->
                         <Grid ColumnSpacing="15" RowSpacing="15">
                             <Grid.ColumnDefinitions>

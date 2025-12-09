@@ -414,6 +414,47 @@ public partial class InstructorDashboardPage : ContentPage
         }
     }
 
+    // Manejar click en botón de recargar
+    private async void OnRefreshClicked(object sender, EventArgs e)
+    {
+        // Evitar múltiples clics mientras se carga
+        if (RefreshSpinner.IsRunning)
+            return;
+
+        await RefreshDashboardWithAnimation();
+    }
+
+    // Refrescar dashboard con animación en el botón
+    private async Task RefreshDashboardWithAnimation()
+    {
+        try
+        {
+            // Mostrar estado de carga en el botón
+            SetRefreshButtonLoading(true);
+
+            // Cargar los datos
+            await LoadDashboardDataAsync();
+        }
+        finally
+        {
+            // Restaurar estado normal del botón
+            SetRefreshButtonLoading(false);
+        }
+    }
+
+    // Cambiar estado visual del botón de recargar
+    private void SetRefreshButtonLoading(bool isLoading)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            RefreshIcon.IsVisible = !isLoading;
+            RefreshSpinner.IsVisible = isLoading;
+            RefreshSpinner.IsRunning = isLoading;
+            RefreshButtonText.Text = isLoading ? "Actualizando..." : "Actualizar Dashboard";
+            RefreshButton.Opacity = isLoading ? 0.7 : 1.0;
+        });
+    }
+
     // Aplicar diseño responsive según el ancho de la pantalla
     private void ApplyResponsiveLayout(double width)
     {
