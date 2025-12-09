@@ -17,9 +17,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <!-- Display name -->
-    <ApplicationTitle>AutoGestión SENA</ApplicationTitle>
+    <ApplicationTitle>AutoGestión</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.sena.autogestion</ApplicationId>
+    <ApplicationId>com.sena.autogestionSena</ApplicationId>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
