@@ -106,7 +106,7 @@
                       HeightRequest="45"
                       HorizontalOptions="FillAndExpand"
                       Margin="0,10,0,0"
-                      IsVisible="{Binding ShowEmptyRequestState}" />
+                      Command="{Binding RequestActionCommand}" />
             </VerticalStackLayout>
           </VerticalStackLayout>
         </Frame>

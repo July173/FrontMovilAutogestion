@@ -32,6 +32,7 @@ namespace AutogestionSenaMaui.ViewModels
             RefreshCommand = new Command(async () => await LoadAsync(ApprenticeId));
             OpenPdfCommand = new Command(async () => await OpenPdfAsync());
             DiagnoseConnectionCommand = new Command(async () => await DiagnoseConnectionAsync());
+            RequestActionCommand = new Command(async () => await OnRequestActionClickedAsync());
             LoadApprenticeMetadata();
         }
 
@@ -162,6 +163,8 @@ namespace AutogestionSenaMaui.ViewModels
         public ICommand OpenPdfCommand { get; }
 
         public ICommand DiagnoseConnectionCommand { get; }
+
+        public ICommand RequestActionCommand { get; }
 
         public async Task LoadAsync(int apprenticeId)
         {
@@ -331,6 +334,32 @@ namespace AutogestionSenaMaui.ViewModels
             catch (Exception)
             {
                 // Error opening PDF handled silently
+            }
+        }
+
+        /// <summary>
+        /// Maneja el clic en el botón de acción de solicitud
+        /// </summary>
+        private async Task OnRequestActionClickedAsync()
+        {
+            if (HasRequest)
+            {
+                // Si ya tiene una solicitud, podría navegar a los detalles
+                // Por ahora solo muestra un mensaje
+                await Application.Current!.MainPage!.DisplayAlert(
+                    "Solicitud Activa",
+                    "Ya tienes una solicitud registrada. Puedes ver los detalles en esta misma pantalla.",
+                    "Entendido");
+            }
+            else
+            {
+                // Si no tiene solicitud, mostrar mensaje de que debe hacerlo desde la web
+                await Application.Current!.MainPage!.DisplayAlert(
+                    "Realizar Solicitud",
+                    "Para realizar una nueva solicitud de etapa productiva, debes acceder a la plataforma web de Autogestión SENA.\n\n" +
+                    "📌 Ingresa a: http://167.114.98.199:81/\n\n" +
+                    "Desde allí podrás registrar tu solicitud con todos los documentos requeridos.",
+                    "Entendido");
             }
         }
     }
