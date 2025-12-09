@@ -16,8 +16,8 @@ namespace AutogestionSena.MAUI.Api
         // private const string BASE_PORT = "8000";
         
         // PRODUCCIÓN: Servidor desplegado
-        private const string BASE_IP = "192.168.1.8";
-        private const string BASE_PORT = "8000";  // Puerto del backend Django
+        private const string BASE_IP = "167.114.98.199";
+        private const string BASE_PORT = "81";  // Puerto del backend Django
         // ============================================
         
         // Configuración de URL base según la plataforma
@@ -32,10 +32,10 @@ namespace AutogestionSena.MAUI.Api
             return $"http://{BASE_IP}:{BASE_PORT}/api/";
 #elif IOS
             // Para iOS usamos la IP de la red local
-            return $"http://{BASE_IP}/api/";
+            return $"http://{BASE_IP}:{BASE_PORT}/api/";
 #else
             // Para Windows y otras plataformas
-            return $"http://{BASE_IP}/api/";
+            return $"http://{BASE_IP}:{BASE_PORT}/api/";
 #endif
         }
 
