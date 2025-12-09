@@ -417,9 +417,14 @@ public partial class InstructorDashboardPage : ContentPage
     // Manejar click en botón de recargar
     private async void OnRefreshClicked(object sender, EventArgs e)
     {
+        System.Diagnostics.Debug.WriteLine("[InstructorDashboard] Botón de actualizar presionado");
+        
         // Evitar múltiples clics mientras se carga
         if (RefreshSpinner.IsRunning)
+        {
+            System.Diagnostics.Debug.WriteLine("[InstructorDashboard] Ya está cargando, ignorando clic");
             return;
+        }
 
         await RefreshDashboardWithAnimation();
     }
@@ -429,11 +434,19 @@ public partial class InstructorDashboardPage : ContentPage
     {
         try
         {
+            System.Diagnostics.Debug.WriteLine("[InstructorDashboard] Iniciando refresh con animación");
+            
             // Mostrar estado de carga en el botón
             SetRefreshButtonLoading(true);
 
             // Cargar los datos
             await LoadDashboardDataAsync();
+            
+            System.Diagnostics.Debug.WriteLine("[InstructorDashboard] Refresh completado");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[InstructorDashboard] Error en refresh: {ex.Message}");
         }
         finally
         {
@@ -447,11 +460,10 @@ public partial class InstructorDashboardPage : ContentPage
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            RefreshIcon.IsVisible = !isLoading;
-            RefreshSpinner.IsVisible = isLoading;
+            RefreshButton.IsVisible = !isLoading;
+            RefreshButton.IsEnabled = !isLoading;
+            RefreshLoadingContainer.IsVisible = isLoading;
             RefreshSpinner.IsRunning = isLoading;
-            RefreshButtonText.Text = isLoading ? "Actualizando..." : "Actualizar Dashboard";
-            RefreshButton.Opacity = isLoading ? 0.7 : 1.0;
         });
     }
 

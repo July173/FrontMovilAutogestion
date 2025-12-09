@@ -21,40 +21,36 @@
  </Frame>
 
  <!-- Botón de recargar -->
- <Frame x:Name="RefreshButton"
- BackgroundColor="#219653"
- CornerRadius="12"
- HeightRequest="48"
- Padding="20,0"
- HasShadow="True"
- HorizontalOptions="Center">
- <Frame.GestureRecognizers>
- <TapGestureRecognizer Tapped="OnRefreshClicked"/>
- </Frame.GestureRecognizers>
- <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Center">
- <!-- Ícono de refresh (visible cuando no está cargando) -->
- <Label x:Name="RefreshIcon"
- Text="&#xf021;"
- FontFamily="FA_Solid"
- FontSize="18"
- TextColor="White"
- VerticalOptions="Center"/>
- <!-- ActivityIndicator (visible cuando está cargando) -->
- <ActivityIndicator x:Name="RefreshSpinner"
- IsRunning="False"
- IsVisible="False"
- Color="White"
- HeightRequest="20"
- WidthRequest="20"
- VerticalOptions="Center"/>
- <Label x:Name="RefreshButtonText"
- Text="Actualizar Dashboard"
- FontSize="16"
- FontAttributes="Bold"
- TextColor="White"
- VerticalOptions="Center"/>
+ <Button x:Name="RefreshButton"
+         Text="🔄 Actualizar Dashboard"
+         BackgroundColor="#219653"
+         TextColor="White"
+         CornerRadius="12"
+         FontSize="16"
+         FontAttributes="Bold"
+         HeightRequest="48"
+         Padding="20,0"
+         HorizontalOptions="Center"
+         Clicked="OnRefreshClicked"/>
+
+ <!-- Indicador de carga del botón -->
+ <HorizontalStackLayout x:Name="RefreshLoadingContainer"
+                        IsVisible="False"
+                        HorizontalOptions="Center"
+                        Spacing="10">
+     <ActivityIndicator x:Name="RefreshSpinner"
+                        IsRunning="False"
+                        Color="#219653"
+                        HeightRequest="24"
+                        WidthRequest="24"
+                        VerticalOptions="Center"/>
+     <Label x:Name="RefreshButtonText"
+            Text="Actualizando..."
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="#219653"
+            VerticalOptions="Center"/>
  </HorizontalStackLayout>
- </Frame>
 
  <!-- Indicador de carga -->
  <ActivityIndicator x:Name="LoadingIndicator" 

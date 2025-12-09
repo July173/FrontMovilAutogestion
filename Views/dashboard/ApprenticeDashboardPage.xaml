@@ -239,15 +239,6 @@
                          TextColor="#555"
                          FontSize="14" />
                 </VerticalStackLayout>
-                <Button Text="Descargar soporte"
-                        BackgroundColor="#FFFFFF"
-                        TextColor="#2E7D32"
-                        BorderColor="#2E7D32"
-                        BorderWidth="1"
-                        CornerRadius="10"
-                        HeightRequest="44"
-                        Command="{Binding OpenPdfCommand}"
-                        IsVisible="{Binding ShowPdfButton}" />
               </VerticalStackLayout>
 
               <VerticalStackLayout IsVisible="{Binding ShowEmptyRequestState}" Spacing="10">
