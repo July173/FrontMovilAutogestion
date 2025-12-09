@@ -32,17 +32,35 @@ namespace AutogestionSena.MAUI.Api.Services
             try
             {
                 var endpoint = Endpoints.Instructor.GetDashboard(instructorId);
-                System.Diagnostics.Debug.WriteLine($"[InstructorService] Llamando endpoint: {endpoint}");
+                var fullUrl = $"{Endpoints.API_BASE_URL}{endpoint}";
+                System.Diagnostics.Debug.WriteLine($"[InstructorService] Llamando endpoint: {fullUrl}");
 
                 var response = await _apiService.GetAsync<InstructorDashboardResponseDto>(endpoint);
                 
-                System.Diagnostics.Debug.WriteLine($"[InstructorService] Respuesta recibida - Success: {response?.Success}");
+                if (response != null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[InstructorService] Respuesta recibida - Success: {response.Success}");
+                    if (response.Data != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[InstructorService] Stats: Visitas={response.Data.Stats?.VisitasProgramadas}, Asignados={response.Data.Stats?.AprendicesAsignados}, Evaluados={response.Data.Stats?.AprendicesEvaluados}");
+                        System.Diagnostics.Debug.WriteLine($"[InstructorService] Próximas visitas: {response.Data.ProximasVisitas?.Count ?? 0}");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("[InstructorService] Data es null");
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("[InstructorService] Response es null");
+                }
                 
                 return response;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[InstructorService] Error al obtener dashboard: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"[InstructorService] Stack: {ex.StackTrace}");
                 throw;
             }
         }

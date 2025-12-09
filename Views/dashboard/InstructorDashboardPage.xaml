@@ -196,17 +196,12 @@
  </VerticalStackLayout>
  </Frame>
 
- <!-- Contenedor de tarjetas de visitas con scroll horizontal -->
- <ScrollView x:Name="VisitasScrollView"
-       Orientation="Horizontal" 
-       HorizontalScrollBarVisibility="Default"
-       HorizontalOptions="FillAndExpand">
- <HorizontalStackLayout x:Name="VisitasContainer" 
-         Spacing="24" 
-         Padding="0,0,24,16">
+ <!-- Contenedor de tarjetas de visitas VERTICAL para móvil -->
+ <VerticalStackLayout x:Name="VisitasContainer" 
+         Spacing="16" 
+         Padding="0,0,0,24">
  <!-- Las tarjetas de visitas se generan dinámicamente -->
- </HorizontalStackLayout>
- </ScrollView>
+ </VerticalStackLayout>
  </VerticalStackLayout>
  </ScrollView>
 </ContentPage>
